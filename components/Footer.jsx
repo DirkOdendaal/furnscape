@@ -8,7 +8,7 @@ import {
 const Footer = () => {
   return (
     <div className="footer-container">
-      <p>Furnscape Pty Ltd. All Rights Reserved</p>
+      <p>Furnscape Pty Ltd. All Rights Reserved.</p>
       <p className="icons">
         <AiFillInstagram />
         <AiOutlineTwitter />

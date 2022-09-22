@@ -1,18 +1,20 @@
-import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import Link from "next/link";
 
 const Login = () => {
   const { user, login, googleSignIn } = useAuth();
-  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleLogin = async (email, password) => {
     try {
       await login(email, password);
-      router.push("/");
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <>
       <div className="login-container">
@@ -26,21 +28,26 @@ const Login = () => {
                 <h3>Email</h3>
               </li>
               <li>
-                <input></input>
+                <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                ></input>
               </li>
               <li>
                 <h3>Password</h3>
               </li>
               <li>
-                <input type="password"></input>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                ></input>
               </li>
               <li>
                 <button
                   type="button"
                   className="login-button"
-                  onClick={() =>
-                    handleLogin("odendaaldirkjnr@gmail.com", "0Dendaal")
-                  }
+                  onClick={() => handleLogin(email, password)}
                 >
                   Login
                 </button>
@@ -56,6 +63,11 @@ const Login = () => {
                   >
                     Sign In with Google
                   </button>
+                </li>
+                <li className="password-reset">
+                  <Link href="/ResetPassword">
+                    <span>Forgot Password?</span>
+                  </Link>
                 </li>
               </ul>
             </div>

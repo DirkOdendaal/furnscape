@@ -3,13 +3,13 @@ import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD4N36eVtRr19Q8eO0GDa7TjVYy3GPaTcw",
-  authDomain: "furnscape-c8ffb.firebaseapp.com",
-  projectId: "furnscape-c8ffb",
-  storageBucket: "furnscape-c8ffb.appspot.com",
-  messagingSenderId: "974947258538",
-  appId: "1:974947258538:web:4b262fa241f2dcfe7f80d3",
-  measurementId: "G-LXDK94SDME",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_NESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
 };
 
 // Initialize Firebase

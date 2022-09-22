@@ -1,6 +1,10 @@
 import React from "react";
-import { LandingPage } from "../components";
+import { HeroBanner } from "../components";
 
 export default function Home() {
-  return <LandingPage />;
+  return (
+    <>
+      <HeroBanner />
+    </>
+  );
 }
