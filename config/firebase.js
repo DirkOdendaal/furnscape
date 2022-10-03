@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
@@ -7,13 +8,17 @@ const firebaseConfig = {
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_NESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIERBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIERBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIERBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
+const db = getFirestore(app);
+if (app.name && typeof window !== "undefined") {
+  const analytics = getAnalytics(app);
+}
+const auth = getAuth();
 
-export const auth = getAuth();
+export { auth, db };

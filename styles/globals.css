@@ -50,9 +50,14 @@ button:hover {
   padding: 10px 15px;
   position: relative;
 }
+
 .navbar-logo {
   max-width: 200px;
   display: flex;
+}
+
+.navbar-logo:hover {
+  cursor: pointer;
 }
 
 .navbar-children-right {
@@ -72,6 +77,17 @@ button:hover {
   background-color: transparent;
 }
 
+/* Cart */
+.cart-wrapper {
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  transition: all 1s ease-in-out;
+}
+
 .cart-item-qty {
   position: absolute;
   right: -8px;
@@ -85,17 +101,6 @@ button:hover {
   font-weight: 600;
 }
 
-/* Cart */
-.cart-wrapper {
-  width: 100vw;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 100;
-  /* will-change: transform; */
-  transition: all 1s ease-in-out;
-}
 .cart-container {
   height: 100vh;
   width: 600px;
@@ -107,15 +112,18 @@ button:hover {
 
 .cart-num-items {
   margin-left: 10px;
-  color: #0fa3b1;
+  color: #012e55;
 }
+
 .empty-cart {
   margin: 40px;
   text-align: center;
 }
+
 .empty-cart h3 {
   font-weight: 600;
   font-size: 20px;
+  padding-bottom: 10px;
 }
 
 .cart-bottom {
@@ -137,10 +145,50 @@ button:hover {
   font-size: 18px;
   font-weight: 500;
   cursor: pointer;
-  gap: 2px;
+  gap: 5px;
+  padding-top: 10px;
   margin-left: 10px;
   border: none;
   background-color: transparent;
+}
+
+.item-desc .flex {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  color: #4f6367;
+}
+
+.item-desc .bottom {
+  margin-top: 60px;
+}
+
+.item-desc .flex {
+  width: 200px;
+}
+
+.item-desc .bottom {
+  margin-top: 30px;
+}
+
+.remove-item {
+  font-size: 24px;
+  color: #012e55;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+.product .cart-product-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 15px;
+  background-color: #ebebeb;
+}
+
+.product {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
 }
 
 /* Footer */
@@ -237,4 +285,163 @@ button:hover {
 
 .password-reset:hover {
   cursor: pointer;
+}
+
+/* Landing Page */
+
+.landing-header {
+  display: flex;
+  justify-content: center;
+  color: #012e55;
+}
+
+/* Products */
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.product-card {
+  cursor: pointer;
+  transform: scale(1, 1);
+  transition: transform 0.5s ease;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}
+
+.product-card p {
+  text-align: center;
+  padding-top: 5px;
+}
+
+.product-card:hover {
+  transform: scale(1.05, 1.05);
+}
+
+.product-image {
+  border-radius: 10px;
+  transform: scale(1, 1);
+  transition: transform 0.5s ease;
+}
+
+.product-name {
+  font-weight: 500;
+}
+
+.product-price {
+  font-weight: 800;
+  margin-top: 6px;
+}
+
+/* Product Details */
+.product-detail-container {
+  display: flex;
+  gap: 40px;
+  margin: 40px;
+  margin-top: 60px;
+}
+
+.product-detail-image {
+  border-radius: 15px;
+  background-color: #ebebeb;
+  width: inherit;
+  height: inherit;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.product-detail-image:hover {
+  background-color: #0fa3b1;
+}
+
+.product-detail-desc h4 {
+  margin-top: 10px;
+}
+
+.product-detail-desc p {
+  margin-top: 10px;
+}
+/* .reviews p {
+  color: #4f6367;
+  margin-top: 0px;
+} */
+.product-detail-desc .price {
+  font-weight: 700;
+  font-size: 26px;
+  margin-top: 30px;
+}
+
+.quantity-desc {
+  border: 1px solid gray;
+  padding: 6px;
+}
+
+.quantity-desc span {
+  font-size: 16px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.quantity-desc .minus {
+  color: #0fa3b1;
+}
+
+.quantity-desc .num {
+  border-right: 1px solid gray;
+  border-left: 1px solid gray;
+  font-size: 20px;
+}
+
+.quantity-desc .plus {
+  color: rgb(49, 168, 49);
+}
+
+.buttons .add-to-cart {
+  padding: 10px 20px;
+  border: 1px solid #012e55;
+  margin-top: 40px;
+  margin-right: 5px;
+  margin-left: 5px;
+  font-size: 17px;
+  font-weight: 500;
+  background-color: white;
+  color: #012e55;
+  cursor: pointer;
+  width: 150px;
+  transform: scale(1, 1);
+  transition: transform 0.5s ease;
+}
+.buttons .add-to-cart:hover {
+  transform: scale(1.1, 1.1);
+}
+
+.buttons .buy-now {
+  width: 150px;
+  padding: 10px 20px;
+  background-color: #012e55;
+  color: #2cdd82;
+  border: none;
+  margin-top: 40px;
+  margin-left: 10px;
+  margin-right: 5px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transform: scale(1, 1);
+  transition: transform 0.5s ease;
+}
+
+.buttons .buy-now:hover {
+  transform: scale(1.1, 1.1);
+}
+
+.image-container {
+  width: 250px;
+  height: 250px;
 }

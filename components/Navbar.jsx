@@ -14,7 +14,7 @@ import Image from "next/image";
 const Navbar = () => {
   const { user, logout } = useAuth();
   const router = useRouter();
-  const { showCart, setShowCart } = useStateContext();
+  const { showCart, setShowCart, totalQuantity } = useStateContext();
 
   return (
     <div className="navbar-container">
@@ -71,7 +71,7 @@ const Navbar = () => {
           onClick={() => setShowCart(true)}
         >
           <AiOutlineShoppingCart />
-          <span className="cart-item-qty">0</span>
+          <span className="cart-item-qty">{totalQuantity}</span>
         </button>
         {showCart && <Cart />}
       </div>

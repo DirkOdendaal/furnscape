@@ -37,7 +37,9 @@ export const StateContext = ({ children }) => {
       setCartItems([...cartItems, { ...product }]);
     }
 
-    toast.success(`${qty}  ${product.name} added to the cart!`);
+    toast.success(`${qty}  ${product.name} added to the cart!`, {
+      style: { backgroundColor: "#012e55", color: "#2cdd82" },
+    });
   };
 
   const onRemove = (product) => {
@@ -101,6 +103,7 @@ export const StateContext = ({ children }) => {
         qty,
         incQuantity,
         decQuantity,
+        setQty,
         onAdd,
         setShowCart,
         setShowMenu,
