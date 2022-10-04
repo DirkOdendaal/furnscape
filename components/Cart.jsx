@@ -7,6 +7,7 @@ import {
   AiOutlineShoppingCart,
   AiOutlineDelete,
 } from "react-icons/ai";
+import { FaWallet } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 import { useStateContext } from "../context/StateContext";
@@ -54,10 +55,7 @@ const Cart = () => {
           {cartItems.length >= 1 &&
             cartItems.map((item) => (
               <div className="product" key={item._id}>
-                <img
-                  src={item.image}
-                  className="cart-product-image"
-                ></img>
+                <img src={item.image} className="cart-product-image"></img>
                 <div className="item-desc">
                   <div className="flex top">
                     <h5>{item.name}</h5>
@@ -103,7 +101,7 @@ const Cart = () => {
               <h3>R{totalPrice}</h3>
             </div>
             <div className="btn-container">
-              <button type="button" className="btn" onClick="">
+              <button type="button" className="checkout" onClick="">
                 Checkout
               </button>
             </div>

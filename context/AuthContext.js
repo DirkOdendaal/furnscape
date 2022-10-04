@@ -11,6 +11,9 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "../config/firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../config/firebase";
+
 import { toast } from "react-hot-toast";
 
 const Context = createContext();
@@ -25,12 +28,17 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log(user);
       if (user) {
         setUser({
           uid: user.uid,
           email: user.email,
           displayName: user.displayName,
+          phoneNumber: user.phoneNumber,
+          emaillVerified: user.emailVerified,
+          photoURL: user.photoURL,
         });
+        handleUserProfile(user);
       } else {
         setUser(null);
       }
@@ -186,4 +194,33 @@ export const AuthContextProvider = ({ children }) => {
       {loading ? null : children}
     </Context.Provider>
   );
+};
+
+export const handleUserProfile = async (userAuth) => {
+  if (!userAuth) return;
+  const { uid } = userAuth;
+
+  const userRef = doc(db, `users`, uid);
+
+  const snapshot = await getDoc(userRef);
+
+  if (!snapshot._document) {
+    const { displayName, email, phoneNumber, emailVerified, photoURL } =
+      userAuth;
+    const timeStamp = new Date();
+
+    try {
+      await setDoc(userRef, {
+        displayName,
+        email,
+        phoneNumber,
+        emailVerified,
+        photoURL,
+        createdAt: timeStamp,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  return userRef;
 };

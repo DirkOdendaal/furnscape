@@ -32,7 +32,7 @@ const ProductDetails = ({ product, reviews }) => {
             </div>
             <p>20</p>
           </div>
-          <h4>Details: </h4>
+          <h4>Description:</h4>
           <p>{description}</p>
           <p className="price">R{price}</p>
           <div className="quantity">
@@ -70,7 +70,6 @@ const ProductDetails = ({ product, reviews }) => {
 
 export const getStaticPaths = async ({}) => {
   //Reviews
-
   return {
     paths: [],
     fallback: "blocking",

@@ -22,7 +22,7 @@ const Navbar = () => {
         <button type="button" className="navbar-buttons">
           <AiOutlineMenu />
         </button>
-        <button type="button" className="btn">
+        <button type="button" className="sell-button">
           Sell on Furnscape?
         </button>
       </div>
