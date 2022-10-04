@@ -28,17 +28,8 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log(user);
       if (user) {
-        setUser({
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName,
-          phoneNumber: user.phoneNumber,
-          emaillVerified: user.emailVerified,
-          photoURL: user.photoURL,
-        });
-        handleUserProfile(user);
+        handleUserProfile(user, setUser);
       } else {
         setUser(null);
       }
@@ -196,7 +187,7 @@ export const AuthContextProvider = ({ children }) => {
   );
 };
 
-export const handleUserProfile = async (userAuth) => {
+export const handleUserProfile = async (userAuth, setUser) => {
   if (!userAuth) return;
   const { uid } = userAuth;
 
@@ -205,9 +196,9 @@ export const handleUserProfile = async (userAuth) => {
   const snapshot = await getDoc(userRef);
 
   if (!snapshot._document) {
-    const { displayName, email, phoneNumber, emailVerified, photoURL } =
-      userAuth;
+    const { displayName, email, phoneNumber, emailVerified } = userAuth;
     const timeStamp = new Date();
+    const role = "customer";
 
     try {
       await setDoc(userRef, {
@@ -215,12 +206,32 @@ export const handleUserProfile = async (userAuth) => {
         email,
         phoneNumber,
         emailVerified,
-        photoURL,
+        role,
         createdAt: timeStamp,
+      });
+      setUser({
+        uid: uid,
+        email: email,
+        displayName: displayName,
+        phoneNumber: phoneNumber,
+        emaillVerified: emailVerified,
+        role: role,
       });
     } catch (error) {
       console.log(error);
     }
+  } else {
+    const userSnap = await getDoc(userRef);
+    const user = userSnap.data();
+    console.log(user);
+    setUser({
+      uid: uid,
+      email: user.email,
+      displayName: user.displayName,
+      phoneNumber: user.phoneNumber,
+      emaillVerified: user.emailVerified,
+      role: user.role,
+    });
   }
   return userRef;
 };

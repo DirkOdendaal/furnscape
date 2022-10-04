@@ -44,11 +44,21 @@ const Navbar = () => {
             >
               Logout
             </button>
-            <Link href="/Account">
-              <button type="button" className="btn">
-                Account
-              </button>
-            </Link>
+            {
+              (user.role == "customer" ? (
+                <Link href="customer/Account">
+                  <button type="button" className="btn">
+                    Account
+                  </button>
+                </Link>
+              ) : (
+                <Link href="supplier/Account">
+                  <button type="button" className="btn">
+                    Account
+                  </button>
+                </Link>
+              ))
+            }
           </>
         ) : (
           <>
