@@ -46,13 +46,13 @@ const Navbar = () => {
             </button>
             {
               (user.role == "customer" ? (
-                <Link href="customer/Account">
+                <Link href="/customer/Account">
                   <button type="button" className="btn">
                     Account
                   </button>
                 </Link>
               ) : (
-                <Link href="supplier/Account">
+                <Link href="/supplier/Account">
                   <button type="button" className="btn">
                     Account
                   </button>

@@ -10,6 +10,7 @@ export const StateContext = ({ children }) => {
   const [totalPrice, settTotalPrice] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [qty, setQty] = useState(1);
+  const [showReviewPopup, setReviewPopUp] = useState(false);
 
   let foundProduct;
   let index;
@@ -101,11 +102,13 @@ export const StateContext = ({ children }) => {
         totalPrice,
         totalQuantity,
         qty,
+        showReviewPopup,
         incQuantity,
         decQuantity,
         setQty,
         onAdd,
         setShowCart,
+        setReviewPopUp,
         setShowMenu,
         toggleCartItemQuantity,
         onRemove,

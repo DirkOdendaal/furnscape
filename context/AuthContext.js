@@ -223,7 +223,6 @@ export const handleUserProfile = async (userAuth, setUser) => {
   } else {
     const userSnap = await getDoc(userRef);
     const user = userSnap.data();
-    console.log(user);
     setUser({
       uid: uid,
       email: user.email,

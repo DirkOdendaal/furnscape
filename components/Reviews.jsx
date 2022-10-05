@@ -6,11 +6,11 @@ const Reviews = ({ review }) => {
   return (
     <div className="review-list-item">
       <div>
-        <h4>{review.user}</h4>
+        <h4>{review.name}</h4>
         {[...Array(5)].map((value, i) => (
           <AiFillStar
-            key={value}
-            color={i < review.review ? "#2cdd82" : "lightgray"}
+            key={`${review.id}-${i}`}
+            color={i < review.review ? "#fdcc0d" : "lightgray"}
           />
         ))}
       </div>

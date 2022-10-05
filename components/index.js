@@ -6,3 +6,4 @@ export { default as HeroBanner } from "./HeroBanner";
 export { default as BestSelling } from "./BestSelling";
 export { default as Product } from "./Product";
 export { default as Reviews } from "./Reviews";
+export { default as ReviewPopup} from "./ReviewPopup";

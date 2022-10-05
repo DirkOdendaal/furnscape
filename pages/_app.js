@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import "../styles/globals.scss";
 import { Layout } from "../components";
 import { AuthContextProvider } from "../context/AuthContext";
 import { StateContext } from "../context/StateContext";

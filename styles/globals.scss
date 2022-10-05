@@ -11,6 +11,8 @@ body,
   width: 0px;
 }
 
+
+
 button:hover {
   cursor: pointer;
 }
@@ -22,6 +24,10 @@ button:hover {
   font-size: 16px;
   color: #2cdd82;
   padding: 5px 15px 5px 15px;
+}
+
+.spacer{
+  width: 70px;
 }
 
 .container {
@@ -498,6 +504,10 @@ button:hover {
   height: 250px;
 }
 
+.reviews {
+  border-top: 1px solid #a19797;
+}
+
 .reviews-container {
   display: flex-start;
   justify-content: center;
@@ -519,6 +529,10 @@ button:hover {
   align-items: center;
   font-weight: 600;
 }
+.review-stars-click:hover {
+  cursor: pointer;
+}
+
 /* Account Details */
 
 .account-details-container {
@@ -564,8 +578,129 @@ button:hover {
   align-items: center;
   gap: 20px;
   border-bottom: 1px solid #a19797;
-  border-top: 1px solid #a19797;
   padding-top: 10px;
   padding-bottom: 10px;
   min-width: 400px;
 }
+
+/* Review Popup */
+.popup-box {
+  position: fixed;
+  background: #00000050;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.box {
+  position: relative;
+  width: 60%;
+  margin: 0 auto;
+  height: auto;
+  max-height: 70vh;
+  margin-top: calc(100vh - 85vh - 20px);
+  background: #fff;
+  border-radius: 4px;
+  padding: 20px;
+  border: 1px solid #999;
+  overflow: auto;
+}
+
+.popup-header{
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 10px 0px rgba(1, 46, 85, 0.5);
+  gap: 20px;
+  padding: 10px;
+}
+
+.popup-review-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 10px 0px rgba(1, 46, 85, 0.5);
+  gap: 10px;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.popup-review-product-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 10px 0px rgba(1, 46, 85, 0.5);
+  gap: 20px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 50%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #012e55;
+  outline: 0;
+  font-size: 1.0rem;
+  color: #012e55;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.0rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: grey;
+  padding-bottom: 5px;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #012e55;
+    font-weight:700;    
+  }
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 6px;  
+  font-weight: 400;
+  border-width: 2px;
+  border-image: linear-gradient(to right, #012e55,#2cdd82);
+  border-image-slice: 1;
+}
+
+.form__field{
+  &:required,&:invalid { box-shadow:none; }
+}
+

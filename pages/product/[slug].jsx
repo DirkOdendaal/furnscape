@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { doc, query, onSnapshot, getDoc, collection } from "firebase/firestore";
-import { Reviews } from "../../components";
+import { Reviews, ReviewPopup } from "../../components";
 import { db } from "../../config/firebase";
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar } from "react-icons/ai";
 import { useStateContext } from "../../context/StateContext";
@@ -9,7 +9,15 @@ const ProductDetails = ({ product, slug }) => {
   const { price, description, name, image } = product;
   const [reviews, setReviews] = useState(null);
   const [reviewsAve, setReviewsAve] = useState(0);
-  const { decQuantity, incQuantity, qty, setQty, onAdd } = useStateContext();
+  const {
+    decQuantity,
+    incQuantity,
+    qty,
+    setQty,
+    onAdd,
+    showReviewPopup,
+    setReviewPopUp,
+  } = useStateContext();
 
   useEffect(() => {
     //product reveiws
@@ -31,7 +39,7 @@ const ProductDetails = ({ product, slug }) => {
 
   useEffect(() => {
     reviews?.map((review) => {
-      setReviewsAve((prevAve) => prevAve + review.review);
+      setReviewsAve((prevAve) => prevAve + review.review / reviews.length);
     });
   }, [reviews]);
 
@@ -84,18 +92,20 @@ const ProductDetails = ({ product, slug }) => {
             <h4>Reviews</h4>
           </div>
           <div className="reviews-header">
-            <p>{reviews?.length} Reviews</p>
-
+            <p>{reviews?.length}</p>
             <div className="review-stars">
-              <p>{reviewsAve ? reviewsAve / reviews?.length : null}</p>
+              <p>{reviews ? reviewsAve : null}</p>
               {[...Array(5)].map((value, i) => (
                 <AiFillStar
-                  key={value}
-                  color={i < reviewsAve ? "#2cdd82" : "lightgray"}
+                  key={`review-total-${i}`}
+                  color={i < reviewsAve ? "#fdcc0d" : "lightgray"}
                 />
               ))}
             </div>
-            <button className="btn">Write Review</button>
+            <button className="btn" onClick={() => setReviewPopUp(true)}>
+              Write Review
+            </button>
+            {showReviewPopup && <ReviewPopup product={product} slug={slug} />}
           </div>
           <div className="reviews">
             {reviews?.map((review) => (
