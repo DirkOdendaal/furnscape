@@ -1,17 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useStateContext } from "../context/StateContext";
 import { AiFillStar } from "react-icons/ai";
-import { collection, doc, addDoc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  query,
+  doc,
+  where,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../config/firebase";
 
 const ReviewPopup = ({ product, slug }) => {
   const { user } = useAuth();
   const { setReviewPopUp } = useStateContext();
+  const [currentReview, setCurrentReview] = useState(null);
+  const [revRef, setRevRef] = useState(null);
   const [rating, setRating] = useState(1);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [name, setName] = useState("");
+  const revCollection = collection(db, `products/${slug}/reviews`);
+
+  useEffect(() => {
+    getCurrentReview();
+  }, []);
+
+  useEffect(() => {
+    if (currentReview) {
+      setRating(currentReview?.review);
+      setTitle(currentReview?.title);
+      setDesc(currentReview?.desc);
+      setName(currentReview?.name);
+      const docRef = doc(db, `products/${slug}/reviews`, currentReview?.id);
+      setRevRef(docRef);
+    }
+  }, [currentReview]);
+
+  const getCurrentReview = async () => {
+    const q = query(revCollection, where("uuid", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.docs.map((currentdoc) => {
+      setCurrentReview({ id: currentdoc.id, ...currentdoc.data() });
+    });
+  };
 
   const publishReview = async () => {
     const documentToPush = {
@@ -21,10 +55,12 @@ const ReviewPopup = ({ product, slug }) => {
       review: rating,
       uuid: user.uid,
     };
-    const revCollection = collection(db, `products/${slug}/reviews`);
-    const reviewCheck = await getDoc(revCollection, documentToPush);
-    console.log();
-    // await addDoc(revCollection, documentToPush);
+    if (!revRef) {
+      await addDoc(revCollection, documentToPush);
+    } else {
+      await updateDoc(revRef, documentToPush);
+    }
+
     setReviewPopUp(false);
   };
 
@@ -65,6 +101,7 @@ const ReviewPopup = ({ product, slug }) => {
               className="form__field"
               placeholder="Title"
               name="title"
+              value={title ? title : ""}
               onChange={(e) => setTitle(e.target.value)}
               id="title"
               required
@@ -79,6 +116,7 @@ const ReviewPopup = ({ product, slug }) => {
               className="form__field"
               placeholder="Review"
               name="desc"
+              value={desc ? desc : ""}
               onChange={(e) => setDesc(e.target.value)}
               id="desc"
               cols={40}
@@ -96,6 +134,7 @@ const ReviewPopup = ({ product, slug }) => {
               className="form__field"
               placeholder="Name"
               name="name"
+              value={name ? name : ""}
               onChange={(e) => setName(e.target.value)}
               id="name"
               required
