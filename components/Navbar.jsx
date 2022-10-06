@@ -8,18 +8,23 @@ import Link from "next/link";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import { useStateContext } from "../context/StateContext";
-import { Cart } from "./";
+import { Cart, Menu } from "./";
 import Image from "next/image";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const router = useRouter();
-  const { showCart, setShowCart, totalQuantity } = useStateContext();
+  const { showCart, setShowCart, showMenu, setShowMenu, totalQuantity } =
+    useStateContext();
 
   return (
     <div className="navbar-container">
-      <div className="navbar-children-right">
-        <button type="button" className="navbar-buttons">
+      <div className="navbar-children-left">
+        <button
+          type="button"
+          className="navbar-buttons"
+          onClick={() => setShowMenu(true)}
+        >
           <AiOutlineMenu />
         </button>
         <button type="button" className="sell-button">
@@ -32,7 +37,53 @@ const Navbar = () => {
         </div>
       </Link>
       <div className="navbar-children-right">
-        {user ? (
+        <div class="dropdown">
+          <button className="sell-button">My Account</button>
+          <div class="dropdown-content">
+            {user ? (
+              <>
+                {user.role == "customer" ? (
+                  <Link href="/customer/Account">
+                    <button type="button" className="btnDrop">
+                      Account
+                    </button>
+                  </Link>
+                ) : (
+                  <Link href="/supplier/Account">
+                    <button type="button" className="btnDrop">
+                      Account
+                    </button>
+                  </Link>
+                )}
+                <button
+                  type="button"
+                  className="btnDrop"
+                  onClick={() => {
+                    logout();
+                    router.push("/");
+                  }}
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/Login">
+                  <button type="button" className="btnDrop">
+                    Login
+                  </button>
+                </Link>
+                <Link href="/Signup">
+                  <button type="button" className="btnDrop">
+                    Signup
+                  </button>
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* {user ? (
           <>
             <button
               type="button"
@@ -44,21 +95,19 @@ const Navbar = () => {
             >
               Logout
             </button>
-            {
-              (user.role == "customer" ? (
-                <Link href="/customer/Account">
-                  <button type="button" className="btn">
-                    Account
-                  </button>
-                </Link>
-              ) : (
-                <Link href="/supplier/Account">
-                  <button type="button" className="btn">
-                    Account
-                  </button>
-                </Link>
-              ))
-            }
+            {user.role == "customer" ? (
+              <Link href="/customer/Account">
+                <button type="button" className="btn">
+                  Account
+                </button>
+              </Link>
+            ) : (
+              <Link href="/supplier/Account">
+                <button type="button" className="btn">
+                  Account
+                </button>
+              </Link>
+            )}
           </>
         ) : (
           <>
@@ -73,7 +122,7 @@ const Navbar = () => {
               </button>
             </Link>
           </>
-        )}
+        )} */}
 
         <button
           type="button"
@@ -84,6 +133,7 @@ const Navbar = () => {
           <span className="cart-item-qty">{totalQuantity}</span>
         </button>
         {showCart && <Cart />}
+        {showMenu && <Menu />}
       </div>
     </div>
   );

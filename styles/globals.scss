@@ -11,7 +11,22 @@ body,
   width: 0px;
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
 button:hover {
   cursor: pointer;
@@ -20,10 +35,22 @@ button:hover {
 .btn {
   background-color: #012e55;
   border: none;
+  width: 100%;
   font-weight: 600;
   font-size: 16px;
   color: #2cdd82;
   padding: 5px 15px 5px 15px;
+}
+
+.btnDrop {
+  background-color: #012e55;
+  border: none;
+  width: 100%;
+  font-weight: 600;
+  font-size: 16px;
+  color: #2cdd82;
+  padding: 5px 15px 5px 15px;
+  margin-top: 1px;
 }
 
 .spacer{
@@ -78,7 +105,17 @@ button:hover {
   width: 100%;
   max-width: 250px;
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar-children-left {
+  width: 100%;
+  max-width: 250px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -90,6 +127,7 @@ button:hover {
   border: none;
   background-color: transparent;
 }
+
 
 /* Cart */
 .cart-wrapper {
@@ -562,6 +600,15 @@ button:hover {
   justify-content: space-between;
   margin-bottom: 10px;
   margin-left: 10px;
+}
+
+.list{
+  border-top: 1px solid #012e55;
+  padding-top: 10px;
+}
+
+.account-details-card ul{
+  margin-bottom: 10px;
 }
 
 .account-card {

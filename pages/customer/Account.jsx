@@ -14,7 +14,7 @@ const Account = () => {
       router.push("/Login");
     }
   }, [router, user]);
-  
+
   return (
     <>
       {user ? (
@@ -26,13 +26,13 @@ const Account = () => {
             </div>
             <div>
               <ul>
-                <Link href="/">
+                <Link href="./Orders">
                   <li>Orders</li>
                 </Link>
-                <Link href="/">
+                <Link href="./Invoices">
                   <li>Invoices</li>
                 </Link>
-                <Link href="/">
+                <Link href="./Reviews">
                   <li>Reviews</li>
                 </Link>
               </ul>
@@ -45,11 +45,11 @@ const Account = () => {
             </div>
             <div>
               <ul>
-                <Link href="/">
+                <Link href="./Details">
                   <li>Personal Details</li>
                 </Link>
-                <Link href="/">
-                  <li>Address book</li>
+                <Link href="./AddressBook">
+                  <li>Address Book</li>
                 </Link>
               </ul>
             </div>
@@ -61,7 +61,7 @@ const Account = () => {
             </div>
             <div>
               <ul>
-                <Link href="/">
+                <Link href="../Help">
                   <li>Help</li>
                 </Link>
               </ul>
