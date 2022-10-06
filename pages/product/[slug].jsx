@@ -4,8 +4,11 @@ import { Reviews, ReviewPopup } from "../../components";
 import { db } from "../../config/firebase";
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar } from "react-icons/ai";
 import { useStateContext } from "../../context/StateContext";
+import { useAuth } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
 const ProductDetails = ({ product, slug }) => {
+  const { user } = useAuth();
   const { price, description, name, image } = product;
   const [reviews, setReviews] = useState(null);
   const [reviewsAve, setReviewsAve] = useState(0);
@@ -38,6 +41,7 @@ const ProductDetails = ({ product, slug }) => {
   }, []);
 
   useEffect(() => {
+    setReviewsAve(0);
     reviews?.map((review) => {
       setReviewsAve((prevAve) => prevAve + review.review / reviews.length);
     });
@@ -102,7 +106,19 @@ const ProductDetails = ({ product, slug }) => {
                 />
               ))}
             </div>
-            <button className="btn" onClick={() => setReviewPopUp(true)}>
+            <button
+              className="btn"
+              onClick={() => {
+                if (user) {
+                  setReviewPopUp(true);
+                } else {
+                  toast.error("Log in To Review This Item", {
+                    style: { backgroundColor: "#012e55", color: "#2cdd82" },
+                    duration: 6000,
+                  });
+                }
+              }}
+            >
               Write Review
             </button>
             {showReviewPopup && <ReviewPopup product={product} slug={slug} />}
