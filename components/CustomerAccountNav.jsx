@@ -9,7 +9,9 @@ const CustomerAccountNav = () => {
       </div>
       <div className="list">
         <div className="account-details-card-header">
-          <h3>Orders</h3>
+          <div>
+            <h3>Orders</h3>
+          </div>
         </div>
         <ul>
           <li>Orders</li>

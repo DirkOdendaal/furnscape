@@ -37,9 +37,9 @@ const Navbar = () => {
         </div>
       </Link>
       <div className="navbar-children-right">
-        <div class="dropdown">
+        <div className="dropdown">
           <button className="sell-button">My Account</button>
-          <div class="dropdown-content">
+          <div className="dropdown-content">
             {user ? (
               <>
                 {user.role == "customer" ? (
