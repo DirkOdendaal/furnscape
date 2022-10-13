@@ -3,7 +3,7 @@ import Link from "next/link";
 import {
   AiOutlineMinus,
   AiOutlinePlus,
-  AiOutlineRight,
+  AiOutlineClose,
   AiOutlineShoppingCart,
   AiOutlineDelete,
 } from "react-icons/ai";
@@ -25,15 +25,16 @@ const Cart = () => {
   return (
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
-        <button
-          type="button"
-          className="flyout-heading"
-          onClick={() => setShowCart(false)}
-        >
-          <AiOutlineRight />
-          <span className="heading">Your Cart</span>
-          <span className="cart-num-items">({totalQuantity} items)</span>
-        </button>
+        <div className="flyout-heading">
+          <div>
+            <span className="heading">Your Cart</span>
+            <span className="cart-num-items">({totalQuantity} items)</span>
+          </div>
+          <AiOutlineClose
+            className="navbar-buttons"
+            onClick={() => setShowCart(false)}
+          />
+        </div>
 
         {cartItems.length < 1 && (
           <div className="empty-cart">

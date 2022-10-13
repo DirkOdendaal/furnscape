@@ -9,8 +9,6 @@ const Product = ({ product: { image, name, id, price } }) => {
         <div className="product-card">
           <img
             src={image}
-            width={150}
-            height={150}
             className="product-image"
           ></img>
           <p className="product-name">{name}</p>

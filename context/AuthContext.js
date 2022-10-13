@@ -8,10 +8,12 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  sendEmailVerification,
   signOut,
+  applyActionCode,
 } from "firebase/auth";
 import { auth } from "../config/firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 import { toast } from "react-hot-toast";
@@ -30,19 +32,18 @@ export const AuthContextProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         handleUserProfile(user, setUser);
+        // if (!user.verificationEmailSent) doEmailVerify();
       } else {
         setUser(null);
       }
-
       setLoading(false);
-
       return () => unsubscribe();
     });
   }, []);
 
   const googleSignIn = () => {
     signInWithPopup(auth, googleProvider)
-      .then((result) => {
+      .then(() => {
         toast.success("Logged in!", {
           style: { backgroundColor: "#012e55", color: "#2cdd82" },
         });
@@ -60,8 +61,9 @@ export const AuthContextProvider = ({ children }) => {
   const signUp = async (email, password) => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        toast.success("Signed Up", {
+        toast.success("Signed Up.\n\nAn Email Verificaton email has been sent to you!", {
           style: { backgroundColor: "#012e55", color: "#2cdd82" },
+          duration: 6000,
         });
         router.push("/");
       })
@@ -92,7 +94,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (email, password) => {
     await signInWithEmailAndPassword(auth, email, password)
-      .then((result) => {
+      .then(() => {
         toast.success("Logged in!", {
           style: { backgroundColor: "#012e55", color: "#2cdd82" },
         });
@@ -187,27 +189,33 @@ export const AuthContextProvider = ({ children }) => {
   );
 };
 
+export const doEmailVerify = async () => {
+  if (!auth.currentUser.emailVerified) {
+    const actionCodeSettings = {
+      url: process.env.NEXT_PUBLIC_FIREBASE_CONFIRMATION_EMAIL_REDIRECT,
+      handleCodeInApp: true,
+    };
+    await sendEmailVerification(auth.currentUser, actionCodeSettings);
+  }
+};
+
 export const handleUserProfile = async (userAuth, setUser) => {
   if (!userAuth) return;
   const { uid } = userAuth;
-
   const userRef = doc(db, `users`, uid);
-
   const snapshot = await getDoc(userRef);
+  const role = "customer";
 
   if (!snapshot._document) {
-    const { displayName, email, phoneNumber, emailVerified } = userAuth;
-    const timeStamp = new Date();
-    const role = "customer";
-
     try {
+      doEmailVerify();
+      const { displayName, email, phoneNumber, emailVerified } = userAuth;
       await setDoc(userRef, {
         displayName,
         email,
         phoneNumber,
         emailVerified,
         role,
-        createdAt: timeStamp,
       });
       setUser({
         uid: uid,
@@ -221,6 +229,10 @@ export const handleUserProfile = async (userAuth, setUser) => {
       console.log(error);
     }
   } else {
+    await updateDoc(userRef, {
+      email: userAuth.email,
+      emailVerified: userAuth.emailVerified,
+    });
     const userSnap = await getDoc(userRef);
     const user = userSnap.data();
     setUser({
@@ -228,7 +240,7 @@ export const handleUserProfile = async (userAuth, setUser) => {
       email: user.email,
       displayName: user.displayName,
       phoneNumber: user.phoneNumber,
-      emaillVerified: user.emailVerified,
+      emailVerified: user.emailVerified,
       role: user.role,
     });
   }

@@ -23,11 +23,12 @@ const Navbar = () => {
         <button
           type="button"
           className="navbar-buttons"
+          id="nav-menu-button"
           onClick={() => setShowMenu(true)}
         >
           <AiOutlineMenu />
         </button>
-        <button type="button" className="sell-button">
+        <button type="button" className="sell-button" id="nav-button">
           Sell on Furnscape?
         </button>
       </div>
@@ -38,7 +39,9 @@ const Navbar = () => {
       </Link>
       <div className="navbar-children-right">
         <div className="dropdown">
-          <button className="sell-button">My Account</button>
+          <button className="sell-button" id="nav-button">
+            My Account
+          </button>
           <div className="dropdown-content">
             {user ? (
               <>
@@ -82,48 +85,6 @@ const Navbar = () => {
             )}
           </div>
         </div>
-
-        {/* {user ? (
-          <>
-            <button
-              type="button"
-              className="btn"
-              onClick={() => {
-                logout();
-                router.push("/");
-              }}
-            >
-              Logout
-            </button>
-            {user.role == "customer" ? (
-              <Link href="/customer/Account">
-                <button type="button" className="btn">
-                  Account
-                </button>
-              </Link>
-            ) : (
-              <Link href="/supplier/Account">
-                <button type="button" className="btn">
-                  Account
-                </button>
-              </Link>
-            )}
-          </>
-        ) : (
-          <>
-            <Link href="/Login">
-              <button type="button" className="btn">
-                Login
-              </button>
-            </Link>
-            <Link href="/Signup">
-              <button type="button" className="btn">
-                Signup
-              </button>
-            </Link>
-          </>
-        )} */}
-
         <button
           type="button"
           className="navbar-buttons"

@@ -92,11 +92,11 @@ const ProductDetails = ({ product, slug }) => {
       <div className="product-review-container">
         <div className="reviews-container">
           <div className=""></div>
-          <div>
+          <div className="reviews-count">
             <h4>Reviews</h4>
+            <p>{reviews?.length}</p>
           </div>
           <div className="reviews-header">
-            <p>{reviews?.length}</p>
             <div className="review-stars">
               <p>{reviews ? reviewsAve : null}</p>
               {[...Array(5)].map((value, i) => (
