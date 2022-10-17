@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { useAuth } from "../context/AuthContext";
 import Link from "next/link";
 
 const Login = () => {
-  const { user, login, googleSignIn } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { login, googleSignIn } = useAuth();
+  const email = useRef();
+  const password = useRef();
 
   const handleLogin = async (email, password) => {
     try {
-      await login(email, password);
+      await login(email.current.value, password.current.value);
     } catch (error) {
       console.log(error);
     }
@@ -28,20 +28,13 @@ const Login = () => {
                 <h3>Email</h3>
               </li>
               <li>
-                <input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                ></input>
+                <input ref={email} type="email"></input>
               </li>
               <li>
                 <h3>Password</h3>
               </li>
               <li>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                ></input>
+                <input type="password" ref={password}></input>
               </li>
               <li>
                 <button

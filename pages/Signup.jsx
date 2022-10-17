@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
 
 const Signup = () => {
-  const { user, signUp } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const { signUp } = useAuth();
+  const email = useRef();
+  const password = useRef();
+  const confirmPassword = useRef();
+
   const [passwordMatch, setPasswordMatch] = useState(false);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const Signup = () => {
 
   const handleSignUp = async (email, password) => {
     try {
-      await signUp(email, password);
+      await signUp(email.current.value, password.current.value);
     } catch (error) {
       console.log(error);
     }
@@ -42,8 +43,7 @@ const Signup = () => {
               </li>
               <li>
                 <input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  ref={email}
                 ></input>
               </li>
               <li>
@@ -52,8 +52,7 @@ const Signup = () => {
               <li>
                 <input
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  ref={password}
                 ></input>
               </li>
               <li>
@@ -62,8 +61,7 @@ const Signup = () => {
               <li>
                 <input
                   type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  ref={confirmPassword}
                 ></input>
               </li>
               <li>

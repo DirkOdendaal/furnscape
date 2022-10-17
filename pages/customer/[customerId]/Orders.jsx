@@ -1,24 +1,22 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useAuth } from "../../context/AuthContext";
-import { AccountLayout } from "../../components";
+import { AccountLayout } from "../../../components";
+import { useAuth } from "../../../context/AuthContext";
 
-const Details = () => {
+const Orders = () => {
   const { user } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    console.log(user);
     if (!user) {
       router.push("/Login");
     }
   }, [router, user]);
-
   return (
     <AccountLayout>
-      <div>Hello</div>
+      <div>orders</div>
     </AccountLayout>
   );
 };
 
-export default Details;
+export default Orders;

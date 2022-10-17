@@ -46,13 +46,13 @@ const Navbar = () => {
             {user ? (
               <>
                 {user.role == "customer" ? (
-                  <Link href="/customer/Account">
+                  <Link href={`/customer/${user.uid}`}>
                     <button type="button" className="btnDrop">
                       Account
                     </button>
                   </Link>
                 ) : (
-                  <Link href="/supplier/Account">
+                  <Link href={`/supplier/Account`}>
                     <button type="button" className="btnDrop">
                       Account
                     </button>

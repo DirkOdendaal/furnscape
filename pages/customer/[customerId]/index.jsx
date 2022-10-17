@@ -1,15 +1,15 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 import { FaShoppingCart, FaUser, FaQuestionCircle } from "react-icons/fa";
 import Link from "next/link";
 
 const Account = () => {
   const { user } = useAuth();
   const router = useRouter();
-
+  const { customerId } = router.query;
+  
   useEffect(() => {
-    console.log(user);
     if (!user) {
       router.push("/Login");
     }
@@ -45,10 +45,10 @@ const Account = () => {
             </div>
             <div>
               <ul>
-                <Link href="./Details">
+                <Link href={`/customer/${customerId}/account/Details`}>
                   <li>Personal Details</li>
                 </Link>
-                <Link href="./AddressBook">
+                <Link href={`./${customerId}/AddressBook`}>
                   <li>Address Book</li>
                 </Link>
               </ul>

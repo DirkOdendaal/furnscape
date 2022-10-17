@@ -43,7 +43,10 @@ const ProductDetails = ({ product, slug }) => {
   useEffect(() => {
     setReviewsAve(0);
     reviews?.map((review) => {
-      setReviewsAve((prevAve) => prevAve + review.review / reviews.length);
+      setReviewsAve(
+        (prevAve) =>
+          Math.round((prevAve + review.review / reviews.length) * 10) / 10
+      );
     });
   }, [reviews]);
 
@@ -124,9 +127,13 @@ const ProductDetails = ({ product, slug }) => {
             {showReviewPopup && <ReviewPopup product={product} slug={slug} />}
           </div>
           <div className="reviews">
-            {reviews?.map((review) => (
-              <Reviews key={review.id} review={review} />
-            ))}
+            {reviews?.length > 1 ? (
+              reviews?.map((review) => (
+                <Reviews key={review.id} review={review} />
+              ))
+            ) : (
+              <div>No Reviews. Be the first to review this product!</div>
+            )}
           </div>
         </div>
       </div>
@@ -134,15 +141,8 @@ const ProductDetails = ({ product, slug }) => {
   );
 };
 
-export const getStaticPaths = async ({}) => {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps = async ({ params: { slug } }) => {
-  //products
+export const getServerSideProps = async ({ params: { slug } }) => {
+  //product
   const productRef = doc(db, `products`, slug);
   const prodSnap = await getDoc(productRef);
   const product = prodSnap.data();

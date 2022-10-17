@@ -72,14 +72,14 @@ const ReviewPopup = ({ product, slug }) => {
           <div>
             <h4>Write Review</h4>
           </div>
-          <div className="navbar-children-left">
+          <div>
             <button className="btn" onClick={() => setReviewPopUp(false)}>
               Close
             </button>
           </div>
         </div>
         <div className="popup-review-product-container">
-          <img src={product.image} width={60} height={60} />
+          <img src={product.image} className="review-detail-image" />
           <p className="product-name">{product.name}</p>
         </div>
         <div className="popup-review-container">

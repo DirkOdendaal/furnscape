@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../../../context/AuthContext";
+import { AccountLayout } from "../../../../components";
 
-const AddressBook = () => {
+const Details = () => {
   const { user } = useAuth();
   const router = useRouter();
 
@@ -12,7 +13,12 @@ const AddressBook = () => {
       router.push("/Login");
     }
   }, [router, user]);
-  return <div>AddressBook</div>;
+
+  return (
+    <AccountLayout>
+      <div>Personal Details</div>
+    </AccountLayout>
+  );
 };
 
-export default AddressBook;
+export default Details;

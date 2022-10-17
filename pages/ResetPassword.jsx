@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useAuth } from "../context/AuthContext";
 
 const ResetPassword = () => {
-  const [email, setEmail] = useState("");
+  const email = useRef();
   const { resetPassword } = useAuth();
 
   const handelReset = async (email) => {
     try {
-      await resetPassword(email).then(() => {
+      await resetPassword(email.current.value).then(() => {
         console.log("Logged In");
       });
     } catch (error) {
@@ -27,10 +27,7 @@ const ResetPassword = () => {
                 <h3>Email</h3>
               </li>
               <li>
-                <input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                ></input>
+                <input ref={email}></input>
               </li>
               <li>
                 <button

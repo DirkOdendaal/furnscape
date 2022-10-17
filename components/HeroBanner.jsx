@@ -61,43 +61,19 @@ const HeroBanner = () => {
               style={{
                 backgroundImage: `url("https://images.unsplash.com/photo-1480936600919-bffa6b7ecf1e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60")`,
               }}
-            >
-              <button className="carousel-button">
-                <AiFillCaretLeft style={{ color: "white" }} />
-              </button>
-              <button className="sell-button">Shop Now</button>
-              <button className="carousel-button">
-                <AiFillCaretRight style={{ color: "white" }} />
-              </button>
-            </div>
+            ></div>
             <div
               className="image-container"
               style={{
                 backgroundImage: `url("https://images.unsplash.com/photo-1480936600919-bffa6b7ecf1e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60")`,
               }}
-            >
-              <button className="carousel-button">
-                <AiFillCaretLeft style={{ color: "white" }} />
-              </button>
-              <button className="sell-button">Shop Now</button>
-              <button className="carousel-button">
-                <AiFillCaretRight style={{ color: "white" }} />
-              </button>
-            </div>
+            ></div>
             <div
               className="image-container"
               style={{
                 backgroundImage: `url("https://images.unsplash.com/photo-1480936600919-bffa6b7ecf1e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60")`,
               }}
-            >
-              <button className="carousel-button">
-                <AiFillCaretLeft style={{ color: "white" }} />
-              </button>
-              <button className="sell-button">Shop Now</button>
-              <button className="carousel-button">
-                <AiFillCaretRight style={{ color: "white" }} />
-              </button>
-            </div>
+            ></div>
           </div>
         </div>
       </div>
