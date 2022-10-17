@@ -676,6 +676,10 @@ button:hover {
   color: #2cdd82;
 }
 
+.account-details-card ul{
+  padding: 10px;
+}
+
 .account-details-card-header {
   display: flex;
   align-items: center;
@@ -1087,7 +1091,7 @@ $size-height: 400px;
 } 
 
 // address book
-.address-book-content{
+.account-content{
   display: flex;
   flex-direction: column;
   border: 1px solid #ccc;

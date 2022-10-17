@@ -14,7 +14,9 @@ const Orders = () => {
   }, [router, user]);
   return (
     <AccountLayout>
-      <div>orders</div>
+      <div>
+        <h3>Orders</h3>
+      </div>
     </AccountLayout>
   );
 };

@@ -4,7 +4,9 @@ import { AccountLayout } from "../../../components";
 const Reviews = () => {
   return (
     <AccountLayout>
-      <div>Reviews</div>
+      <div>
+        <h3>Reviews</h3>
+      </div>
     </AccountLayout>
   );
 };

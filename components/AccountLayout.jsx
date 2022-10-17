@@ -5,7 +5,7 @@ const AccountLayout = ({ children }) => {
   return (
     <div className="account-details-container">
       <CustomerAccountNav />
-      {children}
+      <div className="account-content">{children}</div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ const Account = () => {
   const { user } = useAuth();
   const router = useRouter();
   const { customerId } = router.query;
-  
+
   useEffect(() => {
     if (!user) {
       router.push("/Login");
@@ -26,13 +26,13 @@ const Account = () => {
             </div>
             <div>
               <ul>
-                <Link href="./Orders">
+                <Link href={`/customer/${customerId}/Orders`}>
                   <li>Orders</li>
                 </Link>
-                <Link href="./Invoices">
+                <Link href={`/customer/${customerId}/Invoices`}>
                   <li>Invoices</li>
                 </Link>
-                <Link href="./Reviews">
+                <Link href={`/customer/${customerId}/Reviews`}>
                   <li>Reviews</li>
                 </Link>
               </ul>
@@ -45,7 +45,7 @@ const Account = () => {
             </div>
             <div>
               <ul>
-                <Link href={`/customer/${customerId}/account/Details`}>
+                <Link href={`/customer/${customerId}/Details`}>
                   <li>Personal Details</li>
                 </Link>
                 <Link href={`./${customerId}/AddressBook`}>

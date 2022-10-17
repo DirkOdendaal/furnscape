@@ -37,7 +37,7 @@ const AddressBook = ({ customerId }) => {
 
   return (
     <AccountLayout>
-        <div className="address-book-content">
+        <div>
           <div className="address-heading">
             <h3>Address Book</h3>
             <button className="btn">Add Address</button>

@@ -4,7 +4,9 @@ import { AccountLayout } from "../../../components";
 const Invoices = () => {
   return (
     <AccountLayout>
-      <div>Invoices</div>
+      <div>
+        <h3>Invoices</h3>
+      </div>
     </AccountLayout>
   );
 };

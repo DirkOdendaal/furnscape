@@ -16,7 +16,9 @@ const Details = () => {
 
   return (
     <AccountLayout>
-      <div>Personal Details</div>
+      <div>
+        <h3>Personal Details</h3>
+      </div>
     </AccountLayout>
   );
 };
