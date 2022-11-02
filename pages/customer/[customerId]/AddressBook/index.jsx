@@ -6,6 +6,7 @@ import { MdOutlineAddLocation } from "react-icons/md";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "../../../../config/firebase";
 import { AccountLayout } from "../../../../components";
+import Link from "next/link";
 
 const AddressBook = ({ customerId }) => {
   const { user } = useAuth();
@@ -37,37 +38,39 @@ const AddressBook = ({ customerId }) => {
 
   return (
     <AccountLayout>
-        <div>
-          <div className="address-heading">
-            <h3>Address Book</h3>
+      <div>
+        <div className="address-heading">
+          <h3>Address Book</h3>
+          <Link href={`/customer/${customerId}/AddressBook/add`}>
             <button className="btn">Add Address</button>
-          </div>
-          {addressBook?.length > 1 ? (
-            addressBook.map((address) => (
-              <div className="address-item" key={address.id}>
-                <div className="address">
-                  <span>{`${address.guid.streetNumber} ${address.guid.streetName}`}</span>
-                  <span>
-                    {`${address.guid.suburb}, ${address.guid.city}, ${address.guid.province}, ${address.guid.postalCode}`}
-                  </span>
-                </div>
-                <div className="address-actions">
-                  <AiOutlineEdit className="action-button" />
-                  <AiOutlineDelete className="action-button-delete" />
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="address-item">
+          </Link>
+        </div>
+        {addressBook?.length > 1 ? (
+          addressBook.map((address) => (
+            <div className="address-item" key={address.id}>
               <div className="address">
-                <span>No Addresses. Please add a delivery address.</span>
+                <span>{`${address.guid.streetNumber} ${address.guid.streetName}`}</span>
+                <span>
+                  {`${address.guid.suburb}, ${address.guid.city}, ${address.guid.province}, ${address.guid.postalCode}`}
+                </span>
               </div>
               <div className="address-actions">
-                <MdOutlineAddLocation className="action-button" />
+                <AiOutlineEdit className="action-button" />
+                <AiOutlineDelete className="action-button-delete" />
               </div>
             </div>
-          )}
-        </div>
+          ))
+        ) : (
+          <div className="address-item">
+            <div className="address">
+              <span>No Addresses. Please add a delivery address.</span>
+            </div>
+            <div className="address-actions">
+              <MdOutlineAddLocation className="action-button" />
+            </div>
+          </div>
+        )}
+      </div>
     </AccountLayout>
   );
 };

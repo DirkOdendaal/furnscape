@@ -10,3 +10,4 @@ export { default as Reviews } from "./Reviews";
 export { default as ReviewPopup } from "./ReviewPopup";
 export { default as CustomerAccountNav } from "./CustomerAccountNav";
 export { default as AccountLayout } from "./AccountLayout";
+export { default as AddressSearch } from "./AddressSearch";

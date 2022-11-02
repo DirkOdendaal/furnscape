@@ -17,13 +17,13 @@ const CustomerAccountNav = () => {
           <h3>Orders</h3>
         </div>
         <ul>
-          <Link href={`/customer/${user.uid}/Orders`}>
+          <Link href={`/customer/${user?.uid}/Orders`}>
             <li>Orders</li>
           </Link>
-          <Link href={`/customer/${user.uid}/Invoices`}>
+          <Link href={`/customer/${user?.uid}/Invoices`}>
             <li>Invoices</li>
           </Link>
-          <Link href={`/customer/${user.uid}/Reviews`}>
+          <Link href={`/customer/${user?.uid}/Reviews`}>
             <li>Reviews</li>
           </Link>
         </ul>
@@ -34,10 +34,10 @@ const CustomerAccountNav = () => {
           <h3>Customer Information</h3>
         </div>
         <ul>
-          <Link href={`/customer/${user.uid}/Details`}>
+          <Link href={`/customer/${user?.uid}/Details`}>
             <li>Personal Details</li>
           </Link>
-          <Link href={`/customer/${user.uid}/AddressBook`}>
+          <Link href={`/customer/${user?.uid}/AddressBook`}>
             <li>Address Book</li>
           </Link>
         </ul>

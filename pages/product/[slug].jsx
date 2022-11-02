@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import { doc, query, onSnapshot, getDoc, collection } from "firebase/firestore";
 import { Reviews, ReviewPopup } from "../../components";
 import { db } from "../../config/firebase";
-import { AiOutlineMinus, AiOutlinePlus, AiFillStar } from "react-icons/ai";
+import {
+  AiOutlineMinus,
+  AiOutlinePlus,
+  AiFillStar,
+  AiOutlineClose,
+} from "react-icons/ai";
 import { useStateContext } from "../../context/StateContext";
 import { useAuth } from "../../context/AuthContext";
 import toast from "react-hot-toast";
@@ -50,6 +55,10 @@ const ProductDetails = ({ product, slug }) => {
     });
   }, [reviews]);
 
+  function handleFilterChange(event) {
+    console.log(event.target.value);
+  }
+
   return (
     <div className="product-details-wrapper">
       <div className="product-detail-container">
@@ -94,20 +103,18 @@ const ProductDetails = ({ product, slug }) => {
       </div>
       <div className="product-review-container">
         <div className="reviews-container">
-          <div className=""></div>
-          <div className="reviews-count">
-            <h4>Reviews</h4>
-            <p>{reviews?.length}</p>
-          </div>
           <div className="reviews-header">
             <div className="review-stars">
-              <p>{reviews ? reviewsAve : null}</p>
-              {[...Array(5)].map((value, i) => (
-                <AiFillStar
-                  key={`review-total-${i}`}
-                  color={i < reviewsAve ? "#fdcc0d" : "lightgray"}
-                />
-              ))}
+              <h1>{reviews ? reviewsAve : null}</h1>
+              <p>
+                {[...Array(5)].map((value, i) => (
+                  <AiFillStar
+                    key={`review-total-${i}`}
+                    color={i < reviewsAve ? "#fdcc0d" : "lightgray"}
+                  />
+                ))}
+              </p>
+              <p className="review-stars-count">{reviews?.length} Reviews</p>
             </div>
             <button
               className="btn"
@@ -126,6 +133,45 @@ const ProductDetails = ({ product, slug }) => {
             </button>
             {showReviewPopup && <ReviewPopup product={product} slug={slug} />}
           </div>
+          <div>
+            <div
+              className="filter-reviews"
+              onChange={handleFilterChange}
+              id="filter-reviews"
+            >
+              <div className="filter-header">
+                <h4>Filter Reviews</h4>
+                <AiOutlineClose className="filter-clear" />
+              </div>
+              <div className="filter-radio">
+                <input type="radio" value="5" name="filterReview"></input>
+                <p>5</p>
+                <AiFillStar color={"#fdcc0d"} />
+              </div>
+              <div className="filter-radio">
+                <input type="radio" value="4" name="filterReview"></input>
+                <p>4</p>
+                <AiFillStar color={"#fdcc0d"} />
+              </div>
+              <div className="filter-radio">
+                <input type="radio" value="3" name="filterReview"></input>
+                <p>3</p>
+                <AiFillStar color={"#fdcc0d"} />
+              </div>
+              <div className="filter-radio">
+                <input type="radio" value="2" name="filterReview"></input>
+                <p>2</p>
+                <AiFillStar color={"#fdcc0d"} />
+              </div>
+              <div className="filter-radio">
+                <input type="radio" value="1" name="filterReview"></input>
+                <p>1</p>
+                <AiFillStar color={"#fdcc0d"} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="reviews-container">
           <div className="reviews">
             {reviews?.length > 1 ? (
               reviews?.map((review) => (
