@@ -49,7 +49,7 @@ const Navbar = () => {
           <div className="dropdown-content">
             {user ? (
               <>
-                {user.role == "customer" ? (
+                {user.role === "customer" ? (
                   <Link href={`/customer/${user.uid}`}>
                     <button type="button" className="btnDrop">
                       Account

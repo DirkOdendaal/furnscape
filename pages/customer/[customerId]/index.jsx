@@ -26,13 +26,13 @@ const Account = () => {
             </div>
             <div>
               <ul>
-                <Link href={`/customer/${customerId}/Orders`}>
+                <Link href={`./${customerId}/Orders`}>
                   <li>Orders</li>
                 </Link>
-                <Link href={`/customer/${customerId}/Invoices`}>
+                <Link href={`./${customerId}/Invoices`}>
                   <li>Invoices</li>
                 </Link>
-                <Link href={`/customer/${customerId}/Reviews`}>
+                <Link href={`./${customerId}/Reviews`}>
                   <li>Reviews</li>
                 </Link>
               </ul>
@@ -45,7 +45,7 @@ const Account = () => {
             </div>
             <div>
               <ul>
-                <Link href={`/customer/${customerId}/Details`}>
+                <Link href={`./${customerId}/Details`}>
                   <li>Personal Details</li>
                 </Link>
                 <Link href={`./${customerId}/AddressBook`}>

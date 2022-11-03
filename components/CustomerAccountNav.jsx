@@ -8,7 +8,7 @@ const CustomerAccountNav = () => {
   const [userRoute, setRoute] = useState();
 
   useEffect(() => {
-    if (user?.role == "cutomer") {
+    if (user?.role === "customer") {
       setRoute("customer");
     } else {
       setRoute("supplier");

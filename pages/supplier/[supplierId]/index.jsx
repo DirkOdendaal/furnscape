@@ -15,7 +15,7 @@ const SupplierAccount = () => {
   const { supplierId } = router.query;
 
   useEffect(() => {
-    if (!user || user.role != "supplier") {
+    if (!user || user.role !== "supplier") {
       router.push("/Login");
     }
   }, [router, user]);
