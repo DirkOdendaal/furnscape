@@ -1,15 +1,20 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useAuth } from "../../context/AuthContext";
-import { FaShoppingCart,FaWarehouse, FaUser, FaQuestionCircle } from "react-icons/fa";
+import { useAuth } from "../../../context/AuthContext";
+import {
+  FaShoppingCart,
+  FaWarehouse,
+  FaUser,
+  FaQuestionCircle,
+} from "react-icons/fa";
 import Link from "next/link";
 
 const SupplierAccount = () => {
   const { user } = useAuth();
   const router = useRouter();
+  const { supplierId } = router.query;
 
   useEffect(() => {
-    console.log(user);
     if (!user || user.role != "supplier") {
       router.push("/Login");
     }
@@ -26,11 +31,11 @@ const SupplierAccount = () => {
             </div>
             <div>
               <ul>
-                <Link href="/">
+                <Link href={`/supplier/${supplierId}/Products`}>
                   <li>Products</li>
                 </Link>
-                <Link href="/">
-                  <li>Reviews</li>
+                <Link href={`/supplier/${supplierId}/Invoices`}>
+                  <li>Invoices</li>
                 </Link>
               </ul>
             </div>
@@ -42,12 +47,17 @@ const SupplierAccount = () => {
             </div>
             <div>
               <ul>
-                <Link href="/">
-                  <li>Orders</li>
-                </Link>
-                <Link href="/">
-                  <li>Invoices</li>
-                </Link>
+                <ul>
+                  <Link href={`/supplier/${supplierId}/Orders`}>
+                    <li>Orders</li>
+                  </Link>
+                  <Link href={`/supplier/${supplierId}/Invoices`}>
+                    <li>Invoices</li>
+                  </Link>
+                  <Link href={`/supplier/${supplierId}/Reviews`}>
+                    <li>Reviews</li>
+                  </Link>
+                </ul>
               </ul>
             </div>
           </div>
@@ -58,11 +68,11 @@ const SupplierAccount = () => {
             </div>
             <div>
               <ul>
-                <Link href="/">
-                  <li>Supplier Details</li>
+                <Link href={`/supplier/${supplierId}/Details`}>
+                  <li>Company Details</li>
                 </Link>
-                <Link href="/">
-                  <li>Address book</li>
+                <Link href={`./${supplierId}/AddressBook`}>
+                  <li>Address Book</li>
                 </Link>
               </ul>
             </div>

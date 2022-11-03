@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  AiOutlineShoppingCart,
-  AiOutlineMenu,
-  AiOutlineSearch,
-} from "react-icons/ai";
+import { AiOutlineShoppingCart, AiOutlineMenu } from "react-icons/ai";
 import Link from "next/link";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
@@ -34,9 +30,11 @@ const Navbar = () => {
         >
           <AiOutlineMenu />
         </button>
-        <button type="button" className="sell-button" id="nav-button">
-          Sell on Furnscape?
-        </button>
+        {user?.role !== "supplier" ? (
+          <button type="button" className="sell-button" id="nav-button">
+            Sell on Furnscape?
+          </button>
+        ) : null}
       </div>
       <Link href="/">
         <div className="navbar-logo">
@@ -58,7 +56,7 @@ const Navbar = () => {
                     </button>
                   </Link>
                 ) : (
-                  <Link href={`/supplier/Account`}>
+                  <Link href={`/supplier/${user.uid}`}>
                     <button type="button" className="btnDrop">
                       Account
                     </button>

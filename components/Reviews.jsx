@@ -5,7 +5,7 @@ const Reviews = ({ review }) => {
   //getUserInfo
   return (
     <div className="review-list-item">
-      <div>
+      <div className="user-review">
         <h4>{review.name}</h4>
         {[...Array(5)].map((value, i) => (
           <AiFillStar

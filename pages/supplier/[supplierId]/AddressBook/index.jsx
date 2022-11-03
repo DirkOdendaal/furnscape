@@ -8,7 +8,7 @@ import { db } from "../../../../config/firebase";
 import { AccountLayout } from "../../../../components";
 import Link from "next/link";
 
-const AddressBook = ({ customerId }) => {
+const AddressBook = ({ supplierId }) => {
   const { user } = useAuth();
   const router = useRouter();
   const [addressBook, setAddressBook] = useState(null);
@@ -20,7 +20,7 @@ const AddressBook = ({ customerId }) => {
   }, [router, user]);
 
   useEffect(() => {
-    const addressRef = collection(db, `users/${customerId}`, "addressBook");
+    const addressRef = collection(db, `users/${supplierId}`, "addressBook");
     const q = query(addressRef);
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setAddressBook(
@@ -36,12 +36,16 @@ const AddressBook = ({ customerId }) => {
     };
   }, []);
 
+  useEffect(() => {
+    console.log(addressBook);
+  }, [addressBook]);
+
   return (
     <AccountLayout>
       <div>
         <div className="address-heading">
           <h3>Address Book</h3>
-          <Link href={`/customer/${customerId}/AddressBook/add`}>
+          <Link href={`/supplier/${supplierId}/AddressBook/add`}>
             <button className="btn">Add Address</button>
           </Link>
         </div>
@@ -77,9 +81,9 @@ const AddressBook = ({ customerId }) => {
 
 export const getServerSideProps = async (context) => {
   //currentUserId
-  const customerId = context.query.customerId;
+  const supplierId = context.query.supplierId;
   return {
-    props: { customerId },
+    props: { supplierId },
   };
 };
 
