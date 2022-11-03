@@ -6,14 +6,14 @@ import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <AuthContextProvider>
-      <StateContext>
+    <StateContext>
+      <AuthContextProvider>
         <Layout>
           <Toaster position="bottom-right" reverseOrder={false} />
           <Component {...pageProps} />
         </Layout>
-      </StateContext>
-    </AuthContextProvider>
+      </AuthContextProvider>
+    </StateContext>
   );
 }
 

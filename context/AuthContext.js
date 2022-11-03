@@ -10,14 +10,12 @@ import {
   sendPasswordResetEmail,
   sendEmailVerification,
   signOut,
-  applyActionCode,
 } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
-
 import { toast } from "react-hot-toast";
-
+import { useStateContext } from "./StateContext";
 const Context = createContext();
 const googleProvider = new GoogleAuthProvider();
 
@@ -27,12 +25,12 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const { currentRoute } = useStateContext();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         handleUserProfile(user, setUser);
-        // if (!user.verificationEmailSent) doEmailVerify();
       } else {
         setUser(null);
       }
@@ -47,7 +45,7 @@ export const AuthContextProvider = ({ children }) => {
         toast.success("Logged in!", {
           style: { backgroundColor: "#012e55", color: "#2cdd82" },
         });
-        router.push("/");
+        router.push(currentRoute);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -61,11 +59,14 @@ export const AuthContextProvider = ({ children }) => {
   const signUp = async (email, password) => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        toast.success("Signed Up.\n\nAn Email Verificaton email has been sent to you!", {
-          style: { backgroundColor: "#012e55", color: "#2cdd82" },
-          duration: 6000,
-        });
-        router.push("/");
+        toast.success(
+          "Signed Up.\n\nAn Email Verificaton email has been sent to you!",
+          {
+            style: { backgroundColor: "#012e55", color: "#2cdd82" },
+            duration: 6000,
+          }
+        );
+        router.push(currentRoute);
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -98,7 +99,7 @@ export const AuthContextProvider = ({ children }) => {
         toast.success("Logged in!", {
           style: { backgroundColor: "#012e55", color: "#2cdd82" },
         });
-        router.push("/");
+        router.push(currentRoute);
       })
       .catch((error) => {
         const errorMessage = error.message;

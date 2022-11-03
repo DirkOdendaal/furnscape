@@ -14,8 +14,14 @@ import Image from "next/image";
 const Navbar = () => {
   const { user, logout } = useAuth();
   const router = useRouter();
-  const { showCart, setShowCart, showMenu, setShowMenu, totalQuantity } =
-    useStateContext();
+  const {
+    showCart,
+    setShowCart,
+    showMenu,
+    setShowMenu,
+    totalQuantity,
+    setCurrentRoute,
+  } = useStateContext();
 
   return (
     <div className="navbar-container">
@@ -72,7 +78,13 @@ const Navbar = () => {
             ) : (
               <>
                 <Link href="/Login">
-                  <button type="button" className="btnDrop">
+                  <button
+                    type="button"
+                    className="btnDrop"
+                    onClick={() => {
+                      setCurrentRoute(router.asPath);
+                    }}
+                  >
                     Login
                   </button>
                 </Link>

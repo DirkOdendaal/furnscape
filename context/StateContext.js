@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const Context = createContext();
@@ -12,6 +12,7 @@ export const StateContext = ({ children }) => {
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [qty, setQty] = useState(1);
   const [showReviewPopup, setReviewPopUp] = useState(false);
+  const [currentRoute, setCurrentRoute] = useState("/");
 
   let foundProduct;
   let index;
@@ -105,6 +106,7 @@ export const StateContext = ({ children }) => {
         totalQuantity,
         qty,
         showReviewPopup,
+        currentRoute,
         incQuantity,
         setCatagories,
         decQuantity,
@@ -115,6 +117,7 @@ export const StateContext = ({ children }) => {
         setShowMenu,
         toggleCartItemQuantity,
         onRemove,
+        setCurrentRoute,
       }}
     >
       {children}
