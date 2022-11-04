@@ -36,10 +36,6 @@ const AddressBook = ({ supplierId }) => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(addressBook);
-  }, [addressBook]);
-
   return (
     <AccountLayout>
       <div>

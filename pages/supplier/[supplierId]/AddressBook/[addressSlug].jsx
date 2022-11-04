@@ -19,7 +19,7 @@ const EditAddress = ({ addressSlug }) => {
   const suburbRef = useRef();
 
   const addAddress = () => {
-    console.log(streetRef.current.value);
+    // console.log(streetRef.current.value);
   };
 
   return (

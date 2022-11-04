@@ -1,6 +1,11 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { FaShoppingCart, FaUser, FaQuestionCircle, FaWarehouse, } from "react-icons/fa";
+import {
+  FaShoppingCart,
+  FaUser,
+  FaQuestionCircle,
+  FaWarehouse,
+} from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 
 const CustomerAccountNav = () => {
@@ -28,10 +33,10 @@ const CustomerAccountNav = () => {
               <h3>Products</h3>
             </div>
             <ul>
-              <Link href={`/${userRoute}/${user?.uid}/Orders`}>
+              <Link href={`/${userRoute}/${user?.uid}/Products`}>
                 <li>Products</li>
               </Link>
-              <Link href={`/${userRoute}/${user?.uid}/Invoices`}>
+              <Link href={`/${userRoute}/${user?.uid}/Product-Invoices`}>
                 <li>Invoices</li>
               </Link>
             </ul>
@@ -58,11 +63,19 @@ const CustomerAccountNav = () => {
       <div className="list">
         <div className="nav-section-header">
           <FaUser />
-          <h3>Customer Information</h3>
+          {userRoute === "customer" ? (
+            <h3>Customer Information</h3>
+          ) : (
+            <h3>Company Information</h3>
+          )}
         </div>
         <ul>
           <Link href={`/${userRoute}/${user?.uid}/Details`}>
-            <li>Personal Details</li>
+            {userRoute === "customer" ? (
+              <li>Personal Details</li>
+            ) : (
+              <li>Company Details</li>
+            )}
           </Link>
           <Link href={`/${userRoute}/${user?.uid}/AddressBook`}>
             <li>Address Book</li>
