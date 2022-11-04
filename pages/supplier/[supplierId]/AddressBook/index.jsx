@@ -76,7 +76,6 @@ const AddressBook = ({ supplierId }) => {
 };
 
 export const getServerSideProps = async (context) => {
-  //currentUserId
   const supplierId = context.query.supplierId;
   return {
     props: { supplierId },

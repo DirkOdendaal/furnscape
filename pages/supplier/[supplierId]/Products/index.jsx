@@ -40,7 +40,7 @@ const Products = ({ supplierId }) => {
     <AccountLayout>
       <div className="address-heading">
         <h3>Products</h3>
-        <Link href={`/supplier/${supplierId}/AddressBook/add`}>
+        <Link href={`/supplier/${supplierId}/Products/add`}>
           <button className="btn">Add Product</button>
         </Link>
       </div>
@@ -53,7 +53,7 @@ const Products = ({ supplierId }) => {
               <div className="address">
                 <span>{`Product: ${product.name}`}</span>
                 <span>{`Price: R${product.price}`}</span>
-                <span>{`Sold: ${product.sold}`}</span>
+                <span>{`Number Sold: ${product.sold}`}</span>
               </div>
               <div className="address-actions">
                 <AiOutlineEdit className="action-button" />
