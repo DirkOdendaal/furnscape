@@ -6,4 +6,6 @@ module.exports = {
     domains: ["firebasestorage.googleapis.com"],
     formats: ["image/avif", "image/webp"],
   },
+  basePath: "/nextjs-pages",
+  assetPrefix: "nexjs-pages",
 };
