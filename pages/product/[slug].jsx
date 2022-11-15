@@ -11,10 +11,13 @@ import {
 import { useStateContext } from "../../context/StateContext";
 import { useAuth } from "../../context/AuthContext";
 import toast from "react-hot-toast";
+import Image from "next/image";
+import { useRouter } from "next/router";
 
-const ProductDetails = ({ product, slug }) => {
+const ProductDetails = () => {
   const { user } = useAuth();
-  const { price, description, name, image } = product;
+  // const { price, description, name, image } = product;
+  const [product, setProduct] = useState();
   const [reviews, setReviews] = useState(null);
   const [reviewsAve, setReviewsAve] = useState(0);
   const {
@@ -27,10 +30,19 @@ const ProductDetails = ({ product, slug }) => {
     setReviewPopUp,
   } = useStateContext();
 
+  const router = useRouter();
+  const { slug } = router.query;
+
+  const getProduct = async () => {
+    const productRef = doc(db, `products`, slug);
+    const prodSnap = await getDoc(productRef);
+    setProduct(prodSnap.data());
+  };
+
   useEffect(() => {
-    //product reveiws
     const reviewRef = collection(db, `products/${slug}`, "reviews");
     const q = query(reviewRef);
+    getProduct();
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setReviews(
         snapshot.docs.map((doc) => ({
@@ -43,7 +55,7 @@ const ProductDetails = ({ product, slug }) => {
     return () => {
       unsubscribe;
     };
-  }, []);
+  }, [slug]);
 
   useEffect(() => {
     setReviewsAve(0);
@@ -63,15 +75,23 @@ const ProductDetails = ({ product, slug }) => {
     <div className="product-details-wrapper">
       <div className="product-detail-container">
         <div className="image-container">
-          <img src={image} className="product-detail-image"></img>
+          {product?.image && (
+            <Image
+              height={200}
+              width={200}
+              src={product.image}
+              alt={""}
+              className="product-detail-image"
+            ></Image>
+          )}
           <div className="small-image-container">insert loop here</div>
         </div>
         <div className="product-detail-desc">
-          <h1>{name}</h1>
+          <h1>{product?.name}</h1>
 
           <h4>Description:</h4>
-          <p>{description}</p>
-          <p className="price">R{price}</p>
+          <p>{product?.description}</p>
+          <p className="price">R{product?.price}</p>
           <div className="quantity">
             <h3>Quantity:</h3>
             <p className="quantity-desc">
@@ -185,17 +205,6 @@ const ProductDetails = ({ product, slug }) => {
       </div>
     </div>
   );
-};
-
-export const getServerSideProps = async ({ params: { slug } }) => {
-  //product
-  const productRef = doc(db, `products`, slug);
-  const prodSnap = await getDoc(productRef);
-  const product = prodSnap.data();
-
-  return {
-    props: { product, slug },
-  };
 };
 
 export default ProductDetails;

@@ -255,8 +255,6 @@ button:hover {
   border: none;
 }
 .product .cart-product-image {
-  width: 150px;
-  height: 150px;
   border-radius: 15px;
   background-color: #ebebeb;
 }
@@ -461,8 +459,6 @@ button:hover {
 }
 
 .product-image {
-  width: 150px;
-  height: 150px;
   object-fit: contain;
   border-radius: 10px;
   transform: scale(1, 1);
@@ -508,8 +504,8 @@ button:hover {
 }
 
 .product-detail-image {
-  height: 200px;
-  width: 200px;
+  // height: 200px;
+  // width: 200px;
   object-fit: contain;
   transition: 0.3s ease-in-out;
 }
@@ -630,8 +626,6 @@ button:hover {
 }
 
 .review-detail-image {
-  height: 60px;
-  width: 60px;
   object-fit: contain;
   transition: 0.3s ease-in-out;
 }

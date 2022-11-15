@@ -11,6 +11,7 @@ import { FaWallet } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 import { useStateContext } from "../context/StateContext";
+import Image from "next/image";
 
 const Cart = () => {
   const cartRef = useRef();
@@ -56,7 +57,13 @@ const Cart = () => {
           {cartItems.length >= 1 &&
             cartItems.map((item) => (
               <div className="product" key={item._id}>
-                <img src={item.image} className="cart-product-image"></img>
+                <Image
+                  src={item.image}
+                  width={150}
+                  height={150}
+                  className="cart-product-image"
+                  alt=""
+                ></Image>
                 <div className="item-desc">
                   <div className="flex top">
                     <h5>{item.name}</h5>
@@ -102,7 +109,7 @@ const Cart = () => {
               <h3>R{totalPrice}</h3>
             </div>
             <div className="btn-container">
-              <button type="button" className="checkout" onClick="">
+              <button type="button" className="checkout">
                 Checkout
               </button>
             </div>

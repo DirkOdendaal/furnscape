@@ -8,10 +8,11 @@ import { db } from "../../../../config/firebase";
 import { AccountLayout } from "../../../../components";
 import Link from "next/link";
 
-const AddressBook = ({ customerId }) => {
+const AddressBook = () => {
   const { user } = useAuth();
   const router = useRouter();
   const [addressBook, setAddressBook] = useState(null);
+  const { customerId } = router.query;
 
   useEffect(() => {
     if (!user) {
@@ -34,7 +35,7 @@ const AddressBook = ({ customerId }) => {
     return () => {
       unsubscribe;
     };
-  }, []);
+  }, [customerId]);
 
   return (
     <AccountLayout>
@@ -73,14 +74,6 @@ const AddressBook = ({ customerId }) => {
       </div>
     </AccountLayout>
   );
-};
-
-export const getServerSideProps = async (context) => {
-  //currentUserId
-  const customerId = context.query.customerId;
-  return {
-    props: { customerId },
-  };
 };
 
 export default AddressBook;

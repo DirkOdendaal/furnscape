@@ -1,10 +1,12 @@
 {
   "name": "furnscape",
   "version": "0.1.0",
+  "home": "https://github.com/DirkOdendaal/furnscape",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export" : "next export",
     "start": "next start",
     "lint": "next lint"
   },
@@ -20,6 +22,7 @@
   },
   "devDependencies": {
     "eslint": "8.23.1",
-    "eslint-config-next": "12.3.1"
+    "eslint-config-next": "12.3.1",
+    "gh-pages": "^4.0.0"
   }
 }

@@ -1,10 +1,11 @@
 import React, { useRef } from "react";
 import { AccountLayout, AddressSearch } from "../../../../components";
 import { useLoadScript } from "@react-google-maps/api";
+import { useRouter } from "next/router";
 
 const libraries = ["places"];
 
-const EditAddress = ({ addressSlug }) => {
+const EditAddress = () => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_PLACES_KEY,
     libraries,
@@ -18,9 +19,8 @@ const EditAddress = ({ addressSlug }) => {
   const postalRef = useRef();
   const suburbRef = useRef();
 
-  const addAddress = () => {
-    // console.log(streetRef.current.value);
-  };
+  const router = useRouter();
+  const { addressSlug } = router.query;
 
   return (
     <AccountLayout>
@@ -125,12 +125,6 @@ const EditAddress = ({ addressSlug }) => {
       </div>
     </AccountLayout>
   );
-};
-
-export const getServerSideProps = async ({ params: { addressSlug } }) => {
-  return {
-    props: { addressSlug },
-  };
 };
 
 export default EditAddress;

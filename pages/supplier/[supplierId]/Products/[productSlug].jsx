@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import { AccountLayout } from "../../../../components";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import { db } from "../../../../config/firebase";
+import { useRouter } from "next/router";
 
-const EditProduct = ({ productSlug }) => {
+const EditProduct = () => {
   const [categories, setCategories] = useState();
   const [selectedCat, setCat] = useState();
+  const router = useRouter();
+  const { productSlug } = router.query;
 
   useEffect(() => {
     const collectionRef = collection(db, "catagories");
@@ -80,8 +83,10 @@ const EditProduct = ({ productSlug }) => {
               required
             >
               <option value={-1} style={{ display: "none" }}></option>
-              {categories?.map((category) => (
-                <option value={category.name}>{category.name}</option>
+              {categories?.map((category, index) => (
+                <option key={index} value={category.name}>
+                  {category.name}
+                </option>
               ))}
             </select>
             <label htmlFor="category" className="form__label">
@@ -105,12 +110,6 @@ const EditProduct = ({ productSlug }) => {
       </div>
     </AccountLayout>
   );
-};
-
-export const getServerSideProps = async ({ params: { productSlug } }) => {
-  return {
-    props: { productSlug },
-  };
 };
 
 export default EditProduct;

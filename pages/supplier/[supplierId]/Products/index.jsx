@@ -6,11 +6,13 @@ import { AccountLayout } from "../../../../components";
 import { useAuth } from "../../../../context/AuthContext";
 import { db } from "../../../../config/firebase";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import Image from "next/image";
 
-const Products = ({ supplierId }) => {
+const Products = () => {
   const { user } = useAuth();
   const router = useRouter();
   const [productsList, setProductList] = useState();
+  const { supplierId } = router.query;
 
   useEffect(() => {
     if (!user && user?.role !== "supplier") {
@@ -34,7 +36,7 @@ const Products = ({ supplierId }) => {
         unsubscribe;
       };
     }
-  }, []);
+  }, [user]);
 
   return (
     <AccountLayout>
@@ -45,10 +47,16 @@ const Products = ({ supplierId }) => {
         </Link>
       </div>
       {productsList?.length >= 1
-        ? productsList.map((product) => (
-            <div className="address-item">
+        ? productsList.map((product, index) => (
+            <div key={index} className="address-item">
               <div>
-                <img src={product.image} className="review-detail-image"></img>
+                <Image
+                  height={60}
+                  width={60}
+                  src={product.image}
+                  alt={""}
+                  className="review-detail-image"
+                ></Image>
               </div>
               <div className="address">
                 <span>{`Product: ${product.name}`}</span>
@@ -64,12 +72,6 @@ const Products = ({ supplierId }) => {
         : null}
     </AccountLayout>
   );
-};
-export const getServerSideProps = async (context) => {
-  const supplierId = context.query.supplierId;
-  return {
-    props: { supplierId },
-  };
 };
 
 export default Products;

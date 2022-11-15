@@ -16,6 +16,7 @@ const Menu = () => {
                 src="/fs6.jpeg"
                 width={190}
                 height={35}
+                alt={""}
                 priority={true}
               ></Image>
             </div>

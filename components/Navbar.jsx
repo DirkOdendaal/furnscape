@@ -38,7 +38,13 @@ const Navbar = () => {
       </div>
       <Link href="/">
         <div className="navbar-logo">
-          <Image src="/fs6.jpeg" width={190} height={0} priority={true}></Image>
+          <Image
+            src="/fs6.jpeg"
+            width={190}
+            height={0}
+            alt={""}
+            priority
+          ></Image>
         </div>
       </Link>
       <div className="navbar-children-right">

@@ -19,7 +19,7 @@ const Signup = () => {
     } else {
       setPasswordMatch(false);
     }
-  }, [password, confirmPassword]);
+  }, [password, confirmPassword, passwordMatch]);
 
   const handleSignUp = async (email, password) => {
     try {
@@ -42,27 +42,19 @@ const Signup = () => {
                 <h3>Email</h3>
               </li>
               <li>
-                <input
-                  ref={email}
-                ></input>
+                <input ref={email}></input>
               </li>
               <li>
                 <h3>Password</h3>
               </li>
               <li>
-                <input
-                  type="password"
-                  ref={password}
-                ></input>
+                <input type="password" ref={password}></input>
               </li>
               <li>
                 <h3>Confirm Password</h3>
               </li>
               <li>
-                <input
-                  type="password"
-                  ref={confirmPassword}
-                ></input>
+                <input type="password" ref={confirmPassword}></input>
               </li>
               <li>
                 <button

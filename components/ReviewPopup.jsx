@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../config/firebase";
+import Image from "next/image";
 
 const ReviewPopup = ({ product, slug }) => {
   const { user } = useAuth();
@@ -26,7 +27,7 @@ const ReviewPopup = ({ product, slug }) => {
 
   useEffect(() => {
     getCurrentReview();
-  }, []);
+  });
 
   useEffect(() => {
     if (currentReview) {
@@ -37,7 +38,7 @@ const ReviewPopup = ({ product, slug }) => {
       const docRef = doc(db, `products/${slug}/reviews`, currentReview?.id);
       setRevRef(docRef);
     }
-  }, [currentReview]);
+  }, [currentReview, slug]);
 
   const getCurrentReview = async () => {
     const q = query(revCollection, where("uuid", "==", user.uid));
@@ -79,7 +80,13 @@ const ReviewPopup = ({ product, slug }) => {
           </div>
         </div>
         <div className="popup-review-product-container">
-          <img src={product.image} className="review-detail-image" />
+          <Image
+            width={60}
+            height={60}
+            src={product.image}
+            alt={""}
+            className="review-detail-image"
+          />
           <p className="product-name">{product.name}</p>
         </div>
         <div className="popup-review-container">

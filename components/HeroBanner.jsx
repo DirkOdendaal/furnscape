@@ -23,7 +23,7 @@ const HeroBanner = () => {
     return () => {
       unsubscribe;
     };
-  }, []);
+  });
 
   return (
     <div className="hero-banner-container">
