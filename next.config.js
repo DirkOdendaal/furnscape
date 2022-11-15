@@ -6,6 +6,6 @@ module.exports = {
     domains: ["firebasestorage.googleapis.com"],
     formats: ["image/avif", "image/webp"],
   },
-  basePath: "/funscape",
-  assetPrefix: "/funscape",
+  basePath: "/furnscape",
+  assetPrefix: "/furnscape",
 };
