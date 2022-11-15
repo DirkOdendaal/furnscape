@@ -16,7 +16,6 @@ import { useRouter } from "next/router";
 
 const ProductDetails = () => {
   const { user } = useAuth();
-  // const { price, description, name, image } = product;
   const [product, setProduct] = useState();
   const [reviews, setReviews] = useState(null);
   const [reviewsAve, setReviewsAve] = useState(0);
