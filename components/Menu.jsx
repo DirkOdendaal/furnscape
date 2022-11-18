@@ -13,7 +13,7 @@ const Menu = () => {
           <Link href="/">
             <div className="navbar-logo">
               <Image
-                src="/fs6.jpeg"
+                src="/furnscape/fs6.jpeg"
                 width={190}
                 height={35}
                 alt={""}

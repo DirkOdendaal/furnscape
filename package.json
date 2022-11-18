@@ -18,6 +18,7 @@
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.4.0",
     "react-places-autocomplete": "^7.3.0",
+    "react-select": "^5.6.1",
     "sass": "^1.55.0"
   },
   "devDependencies": {

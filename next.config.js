@@ -5,5 +5,5 @@ module.exports = {
     formats: ["image/avif", "image/webp"],
   },
   basePath: "/furnscape",
-  assetsPath: "/furnscape",
+  assetPrefix: "/furnscape",
 };

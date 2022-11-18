@@ -1,20 +1,55 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AccountLayout } from "../../../../components";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import { db } from "../../../../config/firebase";
 import { useRouter } from "next/router";
+import Select from "react-select";
+import UploadAndDisplayImage from "../../../../components/UploadAndDisplayImage";
 
 const EditProduct = () => {
+  const [catagoriesCollection, setCategoriesCollection] = useState();
   const [categories, setCategories] = useState();
-  const [selectedCat, setCat] = useState();
+  const [subCategories, setSubCategories] = useState();
+  const [selectedCat, setSelectedCat] = useState();
+  const [selectedSubCat, setSelectedSubCat] = useState();
+
   const router = useRouter();
   const { productSlug } = router.query;
+
+  const style = {
+    control: (styles) => ({
+      ...styles,
+      border: 0,
+      boxShadow: "none",
+    }),
+    option: (styles, { isFocused }) => ({
+      ...styles,
+      backgroundColor: isFocused ? "#012e55" : "white",
+      color: isFocused ? "#2cdd82" : "012e55",
+    }),
+    valueContainer: (styles) => ({
+      ...styles,
+      padding: 0,
+    }),
+    singleValue: (styles) => ({
+      ...styles,
+      color: "#012e55",
+    }),
+    clearIndicator: (styles) => ({
+      ...styles,
+      color: "red",
+    }),
+    dropdownIndicator: (styles) => ({
+      ...styles,
+      color: "#2cdd82",
+    }),
+  };
 
   useEffect(() => {
     const collectionRef = collection(db, "catagories");
     const q = query(collectionRef);
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      setCategories(
+      setCategoriesCollection(
         snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
@@ -26,6 +61,32 @@ const EditProduct = () => {
       unsubscribe;
     };
   }, []);
+
+  useEffect(() => {
+    if (catagoriesCollection)
+      setCategories(
+        catagoriesCollection.map((category) => ({
+          value: category.name,
+          label: category.name,
+        }))
+      );
+  }, [catagoriesCollection]);
+
+  useEffect(() => {
+    if (selectedCat) {
+      const subCats = catagoriesCollection.filter((cat) => {
+        return cat.name == selectedCat.value;
+      });
+      setSubCategories(
+        subCats[0].subCategories?.map((cat) => ({
+          value: cat,
+          label: cat,
+        }))
+      );
+    }
+
+    // if (selectedCat) setCategories();
+  }, [selectedCat]);
 
   return (
     <AccountLayout>
@@ -75,37 +136,34 @@ const EditProduct = () => {
             </label>
           </div>
           <div className="form__group field">
-            <select
-              onChange={() => setCat(this.selectedIndex)}
+            <Select
               className="form__field"
+              styles={style}
               name="category"
               id="category"
-              required
-            >
-              <option value={-1} style={{ display: "none" }}></option>
-              {categories?.map((category, index) => (
-                <option key={index} value={category.name}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
+              options={categories}
+              isClearable={true}
+              onChange={(value) => setSelectedCat(value)}
+            />
             <label htmlFor="category" className="form__label">
               Category
             </label>
           </div>
-          {selectedCat && (
+          {selectedCat && subCategories?.length >= 1 && (
             <div className="form__group field">
-              <select
+              <Select
+                styles={style}
                 className="form__field"
-                name="subCat"
-                id="subCat"
-                required
-              ></select>
+                options={subCategories}
+                isClearable={true}
+                onChange={(value) => setSelectedSubCat(value)}
+              />
               <label htmlFor="subCat" className="form__label">
                 Sub Category
               </label>
             </div>
           )}
+          <UploadAndDisplayImage />
         </div>
       </div>
     </AccountLayout>
