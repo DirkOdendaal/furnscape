@@ -86,7 +86,7 @@ const EditProduct = () => {
     }
 
     // if (selectedCat) setCategories();
-  }, [selectedCat]);
+  }, [selectedCat, catagoriesCollection]);
 
   return (
     <AccountLayout>

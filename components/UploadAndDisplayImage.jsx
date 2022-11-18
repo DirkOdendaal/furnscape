@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 const UploadAndDisplayImage = () => {
@@ -18,8 +19,14 @@ const UploadAndDisplayImage = () => {
   return (
     <div>
       <div>
-        {images.map((img) => (
-          <img alt="" width={"150px"} src={URL.createObjectURL(img)} />
+        {images.map((img, index) => (
+          <Image
+            key={index}
+            alt=""
+            width={150}
+            height={150}
+            src={URL.createObjectURL(img)}
+          />
         ))}
       </div>
       <input type="file" multiple onChange={handleChange} />
