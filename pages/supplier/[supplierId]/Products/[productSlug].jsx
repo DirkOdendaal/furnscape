@@ -12,7 +12,7 @@ const EditProduct = () => {
   const [subCategories, setSubCategories] = useState();
   const [selectedCat, setSelectedCat] = useState();
   const [selectedSubCat, setSelectedSubCat] = useState();
-
+  const [images, setImages] = useState([]);
   const router = useRouter();
   const { productSlug } = router.query;
 
@@ -163,7 +163,12 @@ const EditProduct = () => {
               </label>
             </div>
           )}
-          <UploadAndDisplayImage />
+          <UploadAndDisplayImage setImages={setImages} images={images} />
+          <div className="add-address">
+            <button type="btn" className="btn">
+              Add Product
+            </button>
+          </div>
         </div>
       </div>
     </AccountLayout>

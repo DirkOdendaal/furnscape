@@ -214,7 +214,7 @@ button:hover {
   position: absolute;
   bottom: 12px;
   right: 5px;
-  width: 100%;
+  width: 70%;
   padding: 30px 65px;
 }
 
@@ -222,7 +222,6 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
   font-size: 18px;
   font-weight: 500;
   cursor: pointer;
@@ -298,7 +297,6 @@ button:hover {
 .menu-flyout-heading {
   display: flex;
   align-items: center;
-  width: 100%;
   justify-content: space-between;
   font-size: 18px;
   font-weight: 500;
@@ -1217,5 +1215,47 @@ $size-height: 400px;
   color:#2cdd82;
 }
 
+.image-dropzone{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 150px;
+  color: #012e55bb;
+  border: 2px dashed #eeeeee;
+  background-color: #fafafa;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.image-dropzone em{
+  opacity: 0.7;
+}
+
+.image-outer-dropzone .images{
+  display: flex;
+  cursor: pointer;
+}
+
+.image-outer-dropzone{
+  padding: 10px 0px 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  flex-wrap: wrap;
+
+}
+
+.zoned-images{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3px;
+}
+
+.space-top{
+  margin-top: 2px;
+}
 
 

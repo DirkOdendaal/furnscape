@@ -1,35 +1,49 @@
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { useDropzone } from "react-dropzone";
+import { AiOutlineDelete } from "react-icons/ai";
 
-const UploadAndDisplayImage = () => {
-  const [images, setImages] = useState([]);
+const UploadAndDisplayImage = ({ images, setImages }) => {
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      setImages(
+        acceptedFiles.map((file) =>
+          Object.assign(file, { preview: URL.createObjectURL(file) })
+        )
+      );
+    },
+    [images]
+  );
 
-  const handleChange = (e) => {
-    setImages([]);
-    for (let i = 0; i < e.target.files.length; i++) {
-      const newImage = e.target.files[i];
-      setImages((prevState) => [...prevState, newImage]);
-    }
-  };
-
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: { "image/png": [".png"], "image/jpeg": [".jpeg"] },
+    maxFiles: 4,
+  });
 
   return (
-    <div>
-      <div>
+    <div className="image-outer-dropzone">
+      <div {...getRootProps()} className="image-dropzone">
+        <input {...getInputProps()} />
+        <p>Upload Product Images</p>
+        <em>(Max 4 Images)</em>
+      </div>
+      <div className="images">
         {images.map((img, index) => (
-          <Image
-            key={index}
-            alt=""
-            width={150}
-            height={150}
-            src={URL.createObjectURL(img)}
-          />
+          <div key={index} className="zoned-images">
+            <Image
+              alt=""
+              className="product-image"
+              width={100}
+              height={100}
+              src={URL.createObjectURL(img)}
+            />
+            <div className="space-top">
+              <AiOutlineDelete className="action-button-delete" />
+            </div>
+          </div>
         ))}
       </div>
-      <input type="file" multiple onChange={handleChange} />
     </div>
   );
 };
