@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { AiOutlineDelete } from "react-icons/ai";
 

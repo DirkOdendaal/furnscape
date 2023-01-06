@@ -53,7 +53,7 @@ const Products = () => {
                 <Image
                   height={60}
                   width={60}
-                  src={product.image}
+                  src={product.images[0]}
                   alt={""}
                   className="review-detail-image"
                 ></Image>
@@ -64,7 +64,7 @@ const Products = () => {
                 <span>{`Number Sold: ${product.sold}`}</span>
               </div>
               <div className="address-actions">
-                <AiOutlineEdit className="action-button" />
+                <AiOutlineEdit className="action-button" /> 
                 <AiOutlineDelete className="action-button-delete" />
               </div>
             </div>

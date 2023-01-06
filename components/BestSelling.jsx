@@ -27,9 +27,9 @@ const BestSelling = () => {
         <h2>Best Selling Products</h2>
       </div>
       <div className="products-container">
-        {bestSellingProducts?.map((product) => (
+        {bestSellingProducts?.map((product) =>
           <Product key={product.id} product={product} />
-        ))}
+        )}
       </div>
     </>
   );

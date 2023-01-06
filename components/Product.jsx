@@ -3,13 +3,13 @@ import Link from "next/link";
 import { AiFillStar } from "react-icons/ai";
 import Image from "next/image";
 
-const Product = ({ product: { image, name, id, price } }) => {
+const Product = ({ product: { images, name, id, price } }) => {
   return (
     <div>
       <Link href={`/product/${id}`}>
         <div className="product-card">
           <Image
-            src={image}
+            src={images[0]}
             className="product-image"
             width={150}
             height={150}

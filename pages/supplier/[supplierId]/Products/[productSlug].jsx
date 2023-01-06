@@ -1,20 +1,59 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { AccountLayout } from "../../../../components";
-import { collection, query, onSnapshot } from "firebase/firestore";
-import { db } from "../../../../config/firebase";
+import {
+  collection,
+  query,
+  onSnapshot,
+  addDoc,
+  updateDoc,
+  arrayUnion,
+  doc,
+} from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "@firebase/storage";
+import { db, storage } from "../../../../config/firebase";
 import { useRouter } from "next/router";
 import Select from "react-select";
 import UploadAndDisplayImage from "../../../../components/UploadAndDisplayImage";
+import { useAuth } from "../../../../context/AuthContext";
 
 const EditProduct = () => {
+  const { user } = useAuth();
   const [catagoriesCollection, setCategoriesCollection] = useState();
   const [categories, setCategories] = useState();
   const [subCategories, setSubCategories] = useState();
   const [selectedCat, setSelectedCat] = useState();
   const [selectedSubCat, setSelectedSubCat] = useState();
   const [images, setImages] = useState([]);
+  const [desc, setDesc] = useState();
+  const [price, setPrice] = useState();
+  const [name, setName] = useState();
   const router = useRouter();
   const { productSlug } = router.query;
+
+  const handleUpload = async () => {
+    const productsRef = collection(db, "products/");
+    const newProduct = {
+      name,
+      description: desc,
+      price,
+      user: user.uid,
+    };
+    const docRef = await addDoc(productsRef, newProduct);
+
+    await Promise.all(
+      images.map((image) => {
+        const imgRef = ref(storage, `products/${docRef.id}/${image.path}`);
+        uploadBytes(imgRef, image, "data-url").then(async () => {
+          const downloadUrl = await getDownloadURL(imgRef);
+          await updateDoc(doc(db, "products/", docRef.id), {
+            images: arrayUnion(downloadUrl),
+          });
+        });
+      })
+    );
+
+    setImages([]);
+  };
 
   const style = {
     control: (styles) => ({
@@ -84,8 +123,6 @@ const EditProduct = () => {
         }))
       );
     }
-
-    // if (selectedCat) setCategories();
   }, [selectedCat, catagoriesCollection]);
 
   return (
@@ -96,11 +133,13 @@ const EditProduct = () => {
           <div className="form__group field">
             <input
               type="input"
+              value={name ? name : ""}
               className="form__field"
               placeholder="Product Name"
               name="name"
               id="name"
               required
+              onChange={(e) => setName(e.target.value)}
             />
             <label htmlFor="name" className="form__label">
               Product Name
@@ -116,6 +155,8 @@ const EditProduct = () => {
               cols={40}
               rows={5}
               maxLength={3000}
+              value={desc ? desc : ""}
+              onChange={(e) => setDesc(e.target.value)}
               required
             />
             <label htmlFor="desc" className="form__label">
@@ -127,6 +168,8 @@ const EditProduct = () => {
               type="input"
               className="form__field"
               placeholder="Price (R)"
+              value={price ? price : ""}
+              onChange={(e) => setPrice(e.target.value)}
               name="price"
               id="price"
               required
@@ -141,6 +184,7 @@ const EditProduct = () => {
               styles={style}
               name="category"
               id="category"
+              value={selectedCat ? selectedCat : ""}
               options={categories}
               isClearable={true}
               onChange={(value) => setSelectedCat(value)}
@@ -154,6 +198,7 @@ const EditProduct = () => {
               <Select
                 styles={style}
                 className="form__field"
+                value={selectedSubCat ? selectedSubCat : null}
                 options={subCategories}
                 isClearable={true}
                 onChange={(value) => setSelectedSubCat(value)}
@@ -165,7 +210,7 @@ const EditProduct = () => {
           )}
           <UploadAndDisplayImage setImages={setImages} images={images} />
           <div className="add-address">
-            <button type="btn" className="btn">
+            <button type="btn" className="btn" onClick={() => handleUpload()}>
               Add Product
             </button>
           </div>

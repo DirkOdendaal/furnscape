@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 
 const ProductDetails = () => {
   const { user } = useAuth();
-  const [product, setProduct] = useState();
+  const [product, setProduct] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [reviewsAve, setReviewsAve] = useState(0);
   const {
@@ -70,20 +70,34 @@ const ProductDetails = () => {
     console.log(event.target.value);
   }
 
+  if (!user && !reviews && !product) {
+    return <div>Loading ...</div>;
+  }
+
   return (
     <div className="product-details-wrapper">
       <div className="product-detail-container">
         <div className="image-container">
-          {product?.image && (
+          {product?.images && (
             <Image
               height={200}
               width={200}
-              src={product.image}
+              src={product.images[0]}
               alt={""}
               className="product-detail-image"
             ></Image>
           )}
-          <div className="small-image-container">insert loop here</div>
+          <div className="small-image-container">{
+            // <Image
+            //   key={`product-image-array-item-${i}`}
+            //   height={80}
+            //   width={80}
+            //   src={product.images[i]}
+            //   alt={""}
+            //   className="product-detail-image"
+            // ></Image>
+          }
+          </div>
         </div>
         <div className="product-detail-desc">
           <h1>{product?.name}</h1>

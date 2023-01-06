@@ -23,6 +23,8 @@ const Cart = () => {
     toggleCartItemQuantity,
     onRemove,
   } = useStateContext();
+
+  console.log(cartItems);
   return (
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
@@ -58,10 +60,10 @@ const Cart = () => {
             cartItems.map((item) => (
               <div className="product" key={item._id}>
                 <Image
-                  src={item.image}
+                  src={item.images[0]}
                   width={150}
                   height={150}
-                  className="cart-product-image"
+                  className="product-detail-image"
                   alt=""
                 ></Image>
                 <div className="item-desc">
