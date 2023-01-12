@@ -60,7 +60,7 @@ export const AuthContextProvider = ({ children }) => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         toast.success(
-          "Signed Up.\n\nAn Email Verificaton email has been sent to you!",
+          "Signed Up.\n\nVerificaton email has been sent to you!",
           {
             style: { backgroundColor: "#012e55", color: "#2cdd82" },
             duration: 6000,

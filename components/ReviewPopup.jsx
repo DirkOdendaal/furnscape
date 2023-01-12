@@ -27,7 +27,7 @@ const ReviewPopup = ({ product, slug }) => {
 
   useEffect(() => {
     getCurrentReview();
-  });
+  }, []);
 
   useEffect(() => {
     if (currentReview) {
@@ -38,7 +38,7 @@ const ReviewPopup = ({ product, slug }) => {
       const docRef = doc(db, `products/${slug}/reviews`, currentReview?.id);
       setRevRef(docRef);
     }
-  }, [currentReview, slug]);
+  }, [currentReview,slug]);
 
   const getCurrentReview = async () => {
     const q = query(revCollection, where("uuid", "==", user.uid));
@@ -83,7 +83,7 @@ const ReviewPopup = ({ product, slug }) => {
           <Image
             width={60}
             height={60}
-            src={product.image}
+            src={product.images[0]}
             alt={""}
             className="review-detail-image"
           />

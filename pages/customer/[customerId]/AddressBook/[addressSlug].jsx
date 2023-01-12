@@ -27,7 +27,7 @@ const EditAddress = () => {
         <div className="address-content">
           <div className="form__group field">
             <input
-              type="input"
+              type="text"
               className="form__field"
               placeholder="Title"
               name="name"
@@ -41,7 +41,7 @@ const EditAddress = () => {
           </div>
           <div className="form__group field">
             <input
-              type="input"
+              type="text"
               className="form__field"
               placeholder="Title"
               name="number"
@@ -60,7 +60,7 @@ const EditAddress = () => {
           )}
           <div className="form__group field">
             <input
-              type="input"
+              type="text"
               className="form__field"
               placeholder="Title"
               name="province"
@@ -74,7 +74,7 @@ const EditAddress = () => {
           </div>
           <div className="form__group field">
             <input
-              type="input"
+              type="text"
               className="form__field"
               placeholder="Title"
               name="city"
@@ -88,7 +88,7 @@ const EditAddress = () => {
           </div>
           <div className="form__group field">
             <input
-              type="input"
+              type="text"
               className="form__field"
               placeholder="Title"
               name="postal"

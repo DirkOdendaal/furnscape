@@ -24,7 +24,6 @@ const Cart = () => {
     onRemove,
   } = useStateContext();
 
-  console.log(cartItems);
   return (
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
@@ -60,7 +59,8 @@ const Cart = () => {
             cartItems.map((item) => (
               <div className="product" key={item._id}>
                 <Image
-                  src={item.images[0]}
+                  key={`product-img-${item._id}`}
+                  src={item?.images[0]}
                   width={150}
                   height={150}
                   className="product-detail-image"
@@ -97,7 +97,7 @@ const Cart = () => {
                       className="remove-item"
                       onClick={() => onRemove(item)}
                     >
-                      <AiOutlineDelete />
+                      <AiOutlineDelete className="action-button-delete" />
                     </button>
                   </div>
                 </div>

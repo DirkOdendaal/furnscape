@@ -19,6 +19,7 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [reviewsAve, setReviewsAve] = useState(0);
+  const [focusedImg, setFocusedImg] = useState(null);
   const {
     decQuantity,
     incQuantity,
@@ -35,7 +36,11 @@ const ProductDetails = () => {
   const getProduct = async () => {
     const productRef = doc(db, `products`, slug);
     const prodSnap = await getDoc(productRef);
-    setProduct(prodSnap.data());
+    setProduct({ _id: prodSnap.id, ...prodSnap.data() });
+  };
+
+  const handleFocusedImg = (index) => {
+    setFocusedImg(product.images[index]);
   };
 
   useEffect(() => {
@@ -55,6 +60,10 @@ const ProductDetails = () => {
       unsubscribe;
     };
   }, [slug]);
+
+  useEffect(() => {
+    if (product) setFocusedImg(product.images[0]);
+  }, [product]);
 
   useEffect(() => {
     setReviewsAve(0);
@@ -78,25 +87,35 @@ const ProductDetails = () => {
     <div className="product-details-wrapper">
       <div className="product-detail-container">
         <div className="image-container">
-          {product?.images && (
+          {focusedImg && (
             <Image
               height={200}
               width={200}
-              src={product.images[0]}
+              src={focusedImg}
               alt={""}
               className="product-detail-image"
             ></Image>
           )}
-          <div className="small-image-container">{
-            // <Image
-            //   key={`product-image-array-item-${i}`}
-            //   height={80}
-            //   width={80}
-            //   src={product.images[i]}
-            //   alt={""}
-            //   className="product-detail-image"
-            // ></Image>
-          }
+          <div className="small-image-container">
+            {product?.images.map((value, i) => (
+              <div
+                key={`${value}-${i}`}
+                className={
+                  value === focusedImg ? "small-image-focused" : "small-image"
+                }
+              >
+                <Image
+                  height={50}
+                  width={50}
+                  src={value}
+                  alt={""}
+                  onClick={() =>
+                    value !== focusedImg ? handleFocusedImg(i) : ""
+                  }
+                  className="product-detail-image"
+                ></Image>
+              </div>
+            ))}
           </div>
         </div>
         <div className="product-detail-desc">
@@ -206,7 +225,7 @@ const ProductDetails = () => {
         </div>
         <div className="reviews-container">
           <div className="reviews">
-            {reviews?.length > 1 ? (
+            {reviews?.length >= 1 ? (
               reviews?.map((review) => (
                 <Reviews key={review.id} review={review} />
               ))

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../../../../context/AuthContext";
-import { AccountLayout } from "../../../../components";
+import { AccountLayout, UserDetails } from "../../../../components";
 
 const Details = () => {
   const { user } = useAuth();
@@ -16,9 +16,7 @@ const Details = () => {
 
   return (
     <AccountLayout>
-      <div>
-        <h3>Personal Details</h3>
-      </div>
+      <UserDetails user={user}></UserDetails>
     </AccountLayout>
   );
 };

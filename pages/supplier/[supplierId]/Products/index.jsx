@@ -1,4 +1,11 @@
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
@@ -14,6 +21,11 @@ const Products = () => {
   const [productsList, setProductList] = useState();
   const { supplierId } = router.query;
 
+  const handleDelete = async (id) => {
+    const docRef = doc(db, "products", id);
+    await deleteDoc(docRef);
+  };
+
   useEffect(() => {
     if (!user && user?.role !== "supplier") {
       router.push("/");
@@ -27,7 +39,7 @@ const Products = () => {
       const unsubscribe = onSnapshot(productQuery, (snapshot) => {
         setProductList(
           snapshot.docs.map((product) => ({
-            id: product.id,
+            _id: product.id,
             ...product.data(),
           }))
         );
@@ -49,7 +61,7 @@ const Products = () => {
       {productsList?.length >= 1
         ? productsList.map((product, index) => (
             <div key={index} className="address-item">
-              <div>
+              <div className="address-allignment">
                 <Image
                   height={60}
                   width={60}
@@ -57,15 +69,19 @@ const Products = () => {
                   alt={""}
                   className="review-detail-image"
                 ></Image>
+                <div className="address">
+                  <span>{`Product: ${product.name}`}</span>
+                  <span>{`Price: R${product.price}`}</span>
+                  <span>{`Number Sold: ${product.sold}`}</span>
+                </div>
               </div>
-              <div className="address">
-                <span>{`Product: ${product.name}`}</span>
-                <span>{`Price: R${product.price}`}</span>
-                <span>{`Number Sold: ${product.sold}`}</span>
-              </div>
+
               <div className="address-actions">
-                <AiOutlineEdit className="action-button" /> 
-                <AiOutlineDelete className="action-button-delete" />
+                <AiOutlineEdit className="action-button" />
+                <AiOutlineDelete
+                  className="action-button-delete"
+                  onClick={() => handleDelete(product._id)}
+                />
               </div>
             </div>
           ))

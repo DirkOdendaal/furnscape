@@ -8,7 +8,7 @@ const BestSelling = () => {
 
   useEffect(() => {
     const collectionRef = collection(db, "products");
-    const q = query(collectionRef, limit(10));
+    const q = query(collectionRef, limit(16));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       setBestSelling(
         querySnapshot.docs.map((doc) => ({
@@ -22,16 +22,16 @@ const BestSelling = () => {
   }, []);
 
   return (
-    <>
+    <div className="product-grid">
       <div className="landing-header">
         <h2>Best Selling Products</h2>
       </div>
       <div className="products-container">
-        {bestSellingProducts?.map((product) =>
+        {bestSellingProducts?.map((product) => (
           <Product key={product.id} product={product} />
-        )}
+        ))}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -25,7 +25,7 @@ const EditProduct = () => {
   const [selectedSubCat, setSelectedSubCat] = useState();
   const [images, setImages] = useState([]);
   const [desc, setDesc] = useState();
-  const [price, setPrice] = useState();
+  const [price, setPrice] = useState(0);
   const [name, setName] = useState();
   const router = useRouter();
   const { productSlug } = router.query;
@@ -37,6 +37,9 @@ const EditProduct = () => {
       description: desc,
       price,
       user: user.uid,
+      sold: 0,
+      companyName: user.displayName,
+      dateTime: new Date().toLocaleString(),
     };
     const docRef = await addDoc(productsRef, newProduct);
 
@@ -53,6 +56,11 @@ const EditProduct = () => {
     );
 
     setImages([]);
+    setPrice(0);
+    setName(null);
+    setDesc(null);
+    setSelectedCat(null);
+    setSelectedSubCat(null);
   };
 
   const style = {
@@ -165,11 +173,11 @@ const EditProduct = () => {
           </div>
           <div className="form__group field">
             <input
-              type="input"
+              type="number"
               className="form__field"
               placeholder="Price (R)"
               value={price ? price : ""}
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setPrice(Number(e.target.value))}
               name="price"
               id="price"
               required
