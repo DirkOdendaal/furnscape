@@ -47,17 +47,15 @@ const SupplierAccount = () => {
             </div>
             <div>
               <ul>
-                <ul>
-                  <Link href={`./${supplierId}/Orders`}>
-                    <li>Orders</li>
-                  </Link>
-                  <Link href={`./${supplierId}/Invoices`}>
-                    <li>Invoices</li>
-                  </Link>
-                  <Link href={`./${supplierId}/Reviews`}>
-                    <li>Reviews</li>
-                  </Link>
-                </ul>
+                <Link href={`./${supplierId}/Orders`}>
+                  <li>Orders</li>
+                </Link>
+                <Link href={`./${supplierId}/Invoices`}>
+                  <li>Invoices</li>
+                </Link>
+                <Link href={`./${supplierId}/Reviews`}>
+                  <li>Reviews</li>
+                </Link>
               </ul>
             </div>
           </div>

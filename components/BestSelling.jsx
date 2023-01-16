@@ -1,4 +1,10 @@
-import { collection, query, limit, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  query,
+  limit,
+  onSnapshot,
+  orderBy,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../config/firebase";
 import { Product } from "./";
@@ -8,7 +14,7 @@ const BestSelling = () => {
 
   useEffect(() => {
     const collectionRef = collection(db, "products");
-    const q = query(collectionRef, limit(16));
+    const q = query(collectionRef, limit(16), orderBy("sold", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       setBestSelling(
         querySnapshot.docs.map((doc) => ({

@@ -61,8 +61,8 @@ const Cart = () => {
                 <Image
                   key={`product-img-${item._id}`}
                   src={item?.images[0]}
-                  width={150}
-                  height={150}
+                  width={100}
+                  height={100}
                   className="product-detail-image"
                   alt=""
                 ></Image>
@@ -110,8 +110,8 @@ const Cart = () => {
               <h3>Subtotal</h3>
               <h3>R{totalPrice}</h3>
             </div>
-            <div className="btn-container">
-              <button type="button" className="checkout">
+            <div className="buttons">
+              <button type="button" className="buy-now">
                 Checkout
               </button>
             </div>

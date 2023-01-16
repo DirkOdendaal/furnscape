@@ -5,6 +5,7 @@ import {
   onSnapshot,
   deleteDoc,
   doc,
+  orderBy,
 } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -70,9 +71,18 @@ const Products = () => {
                   className="review-detail-image"
                 ></Image>
                 <div className="address">
-                  <span>{`Product: ${product.name}`}</span>
-                  <span>{`Price: R${product.price}`}</span>
-                  <span>{`Number Sold: ${product.sold}`}</span>
+                  <span>
+                    <b>Product Name: </b>
+                    {product.name}
+                  </span>
+                  <span>
+                    <b>Price: </b>
+                    {`R${product.price}`}
+                  </span>
+                  <span>
+                    <b>Number Sold: </b>
+                    {product.sold}
+                  </span>
                 </div>
               </div>
 
