@@ -188,8 +188,6 @@ button:hover {
 
 .cart-container {
   height: 100vh;
-  max-width: 600px;
-  min-width: 200px;
   background-color: white;
   float: right;
   position: relative;
@@ -216,10 +214,11 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 370px;
+  justify-content: center;
+  width: 330px;
   position: fixed;
   bottom: 0px;
-  padding: 10px 0px;
+  padding: 10px 20px;
   background-color: white;
 }
 
@@ -277,7 +276,6 @@ button:hover {
   display: flex;
   gap: 30px;
   padding: 20px;
-  z-index: -99;
 }
 
 .checkout {
