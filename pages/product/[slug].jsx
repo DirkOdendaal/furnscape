@@ -121,8 +121,6 @@ const ProductDetails = () => {
         <div className="product-detail-desc">
           <h1>{product?.name}</h1>
 
-          <h4>Description:</h4>
-          <p>{product?.description}</p>
           <p className="price">R{product?.price}</p>
           <div className="quantity">
             <h3>Quantity:</h3>
@@ -151,6 +149,27 @@ const ProductDetails = () => {
               Buy Now
             </button>
           </div>
+          <h4>Description:</h4>
+          <p>{product?.description}</p>
+
+          {product?.catagory ? (
+            <table className="product-detail-table" cellSpacing="0">
+              <tbody>
+                <tr>
+                  <th>Supplier</th>
+                  <td>{product?.companyName}</td>
+                </tr>
+                <tr>
+                  <th>Catagory</th>
+                  <td>{product?.catagory.cat}</td>
+                </tr>
+                <tr>
+                  <th>Sub-Catagory</th>
+                  <td>{product?.catagory.subCat}</td>
+                </tr>
+              </tbody>
+            </table>
+          ) : null}
         </div>
       </div>
       <div className="product-review-container">
@@ -223,7 +242,7 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
-        <div className="reviews-container">
+        <div className="reviews-container-right">
           <div className="reviews">
             {reviews?.length >= 1 ? (
               reviews?.map((review) => (

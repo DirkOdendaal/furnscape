@@ -38,7 +38,7 @@ const ReviewPopup = ({ product, slug }) => {
       const docRef = doc(db, `products/${slug}/reviews`, currentReview?.id);
       setRevRef(docRef);
     }
-  }, [currentReview,slug]);
+  }, [currentReview, slug]);
 
   const getCurrentReview = async () => {
     const q = query(revCollection, where("uuid", "==", user.uid));
@@ -110,6 +110,7 @@ const ReviewPopup = ({ product, slug }) => {
               name="title"
               value={title ? title : ""}
               onChange={(e) => setTitle(e.target.value)}
+              maxLength={50}
               id="title"
               required
             />

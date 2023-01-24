@@ -7,12 +7,13 @@ import {
   doc,
   orderBy,
 } from "firebase/firestore";
+import { ref, deleteObject } from "firebase/storage";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { AccountLayout } from "../../../../components";
 import { useAuth } from "../../../../context/AuthContext";
-import { db } from "../../../../config/firebase";
+import { db, storage } from "../../../../config/firebase";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import Image from "next/image";
 
@@ -22,9 +23,25 @@ const Products = () => {
   const [productsList, setProductList] = useState();
   const { supplierId } = router.query;
 
-  const handleDelete = async (id) => {
-    const docRef = doc(db, "products", id);
-    await deleteDoc(docRef);
+  const handleDelete = async (deleteProd) => {
+    const docRef = doc(db, "products", deleteProd._id);
+    await deleteDoc(docRef)
+      .then(() => {
+        //setToast
+      })
+      .catch(() => {
+        //setToast
+      });
+    deleteProd.images.forEach(async (img) => {
+      const imgRef = ref(storage, img);
+      await deleteObject(imgRef)
+        .then(() => {
+          //setToast
+        })
+        .catch(() => {
+          //setToast
+        });
+    });
   };
 
   useEffect(() => {
@@ -36,7 +53,11 @@ const Products = () => {
   useEffect(() => {
     if (user) {
       const productRef = collection(db, `products`);
-      const productQuery = query(productRef, where("user", "==", user.uid));
+      const productQuery = query(
+        productRef,
+        where("user", "==", user.uid),
+        orderBy("name")
+      );
       const unsubscribe = onSnapshot(productQuery, (snapshot) => {
         setProductList(
           snapshot.docs.map((product) => ({
@@ -90,7 +111,7 @@ const Products = () => {
                 <AiOutlineEdit className="action-button" />
                 <AiOutlineDelete
                   className="action-button-delete"
-                  onClick={() => handleDelete(product._id)}
+                  onClick={() => handleDelete(product)}
                 />
               </div>
             </div>

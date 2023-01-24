@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import Select from "react-select";
 import UploadAndDisplayImage from "../../../../components/UploadAndDisplayImage";
 import { useAuth } from "../../../../context/AuthContext";
+import { toast } from "react-hot-toast";
 
 const EditProduct = () => {
   const { user } = useAuth();
@@ -32,35 +33,50 @@ const EditProduct = () => {
 
   const handleUpload = async () => {
     const productsRef = collection(db, "products/");
-    const newProduct = {
-      name,
-      description: desc,
-      price,
-      user: user.uid,
-      sold: 0,
-      companyName: user.displayName,
-      dateTime: new Date().toLocaleString(),
-    };
-    const docRef = await addDoc(productsRef, newProduct);
+    if (
+      name == null ||
+      desc == null ||
+      price == 0 ||
+      selectedCat == null ||
+      selectedSubCat == null
+    ) {
+      toast.error("Fill in all fields!", {
+        style: { backgroundColor: "#012e55", color: "#2cdd82" },
+        duration: 2000,
+      });
+    } else {
+      const catagory = { cat: selectedCat.value, subCat: selectedSubCat.value };
+      const newProduct = {
+        name,
+        description: desc,
+        price,
+        catagory,
+        user: user.uid,
+        sold: 0,
+        companyName: user.displayName,
+        dateTime: new Date().toLocaleString(),
+      };
+      const docRef = await addDoc(productsRef, newProduct);
 
-    await Promise.all(
-      images.map((image) => {
-        const imgRef = ref(storage, `products/${docRef.id}/${image.path}`);
-        uploadBytes(imgRef, image, "data-url").then(async () => {
-          const downloadUrl = await getDownloadURL(imgRef);
-          await updateDoc(doc(db, "products/", docRef.id), {
-            images: arrayUnion(downloadUrl),
+      await Promise.all(
+        images.map((image) => {
+          const imgRef = ref(storage, `products/${docRef.id}/${image.path}`);
+          uploadBytes(imgRef, image, "data-url").then(async () => {
+            const downloadUrl = await getDownloadURL(imgRef);
+            await updateDoc(doc(db, "products/", docRef.id), {
+              images: arrayUnion(downloadUrl),
+            });
           });
-        });
-      })
-    );
+        })
+      );
 
-    setImages([]);
-    setPrice(0);
-    setName(null);
-    setDesc(null);
-    setSelectedCat(null);
-    setSelectedSubCat(null);
+      setImages([]);
+      setPrice(0);
+      setName(null);
+      setDesc(null);
+      setSelectedCat(null);
+      setSelectedSubCat(null);
+    }
   };
 
   const style = {
