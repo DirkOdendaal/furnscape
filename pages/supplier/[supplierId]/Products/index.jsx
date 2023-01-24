@@ -53,11 +53,7 @@ const Products = () => {
   useEffect(() => {
     if (user) {
       const productRef = collection(db, `products`);
-      const productQuery = query(
-        productRef,
-        where("user", "==", user.uid),
-        orderBy("name")
-      );
+      const productQuery = query(productRef, where("user", "==", user.uid));
       const unsubscribe = onSnapshot(productQuery, (snapshot) => {
         setProductList(
           snapshot.docs.map((product) => ({
