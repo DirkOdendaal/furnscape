@@ -18,26 +18,28 @@ export const StateContext = ({ children }) => {
   let index;
 
   const onAdd = (product, quantity) => {
-    const checkProductInCart = cartItems.find(
-      (item) => item._id === product._id
-    );
+    foundProduct = cartItems.find((item) => item._id === product._id);
 
     settTotalPrice(
       (prevtTotalPrice) => prevtTotalPrice + product.price * quantity
     );
     setTotalQuantity((prevTotalQuantity) => prevTotalQuantity + quantity);
 
-    if (checkProductInCart) {
-      const updatedCartItems = cartItems.map((cartProduct) => {
-        if (cartProduct._id === product._id) {
-          return { ...cartProduct, quantity: cartProduct.quantity + quantity };
-        }
-      });
+    console.log(`FoundProduct:`);
+    console.log(foundProduct);
+    if (foundProduct) {
+      console.log("Update");
+      const updatedCartItems = cartItems.map((item) =>
+        item._id === product._id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
       console.log(updatedCartItems);
       setCartItems(updatedCartItems);
     } else {
-      product.quantity = quantity;
-      setCartItems([...cartItems, { ...product }]);
+      console.log("Create");
+      console.log([...cartItems, { ...product, quantity: quantity }]);
+      setCartItems([...cartItems, { ...product, quantity: quantity }]);
     }
 
     toast.success(`${qty}  ${product.name} added to the cart!`, {
@@ -63,16 +65,16 @@ export const StateContext = ({ children }) => {
     foundProduct = cartItems.find((item) => item._id === id);
 
     if (value === "inc") {
-      const updatedCartItems = cartItems.map((itmen) =>
-        itmen._id === id ? { ...itmen, quantity: itmen.quantity + 1 } : itmen
+      const updatedCartItems = cartItems.map((item) =>
+        item._id === id ? { ...item, quantity: item.quantity + 1 } : item
       );
       setCartItems(updatedCartItems);
       settTotalPrice((prevtTotalPrice) => prevtTotalPrice + foundProduct.price);
       setTotalQuantity((prevTotalQuantity) => prevTotalQuantity + 1);
     } else if (value === "dec") {
       if (foundProduct.quantity > 1) {
-        const updatedCartItems = cartItems.map((itmen) =>
-          itmen._id === id ? { ...itmen, quantity: itmen.quantity - 1 } : itmen
+        const updatedCartItems = cartItems.map((item) =>
+          item._id === id ? { ...item, quantity: item.quantity - 1 } : item
         );
         setCartItems(updatedCartItems);
         settTotalPrice(
