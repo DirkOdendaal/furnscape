@@ -12,3 +12,8 @@ export { default as CustomerAccountNav } from "./CustomerAccountNav";
 export { default as AccountLayout } from "./AccountLayout";
 export { default as AddressSearch } from "./AddressSearch";
 export { default as UserDetails } from "./UserDetails";
+export { default as Category } from "./Category";
+export { default as Loading } from "./Loading";
+export { default as Error } from "./Error";
+export { default as ImageCarousel } from "./ImageCarousel";
+export { default as ProductCarousel } from "./ProductCarousel";

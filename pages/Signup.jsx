@@ -1,27 +1,30 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
 
 const Signup = () => {
+  const toastStyle = { backgroundColor: "#012e55", color: "#2cdd82" };
   const { signUp } = useAuth();
-  const email = useRef();
-  const password = useRef();
-  const confirmPassword = useRef();
+  const email = useRef("");
+  const password = useRef("");
 
-  const [passwordMatch, setPasswordMatch] = useState(false);
-
-  useEffect(() => {
-    if (
-      password === confirmPassword &&
-      (passwordMatch !== "" || password !== "")
-    ) {
-      setPasswordMatch(true);
-    } else {
-      setPasswordMatch(false);
+  const handleSignUp = async () => {
+    if (email.current.value === "") {
+      toast.error("Email Cannot Be Empty", {
+        style: toastStyle,
+        duration: 6000,
+      });
+      return;
     }
-  }, [password, confirmPassword, passwordMatch]);
 
-  const handleSignUp = async (email, password) => {
+    if (password.current.value === "") {
+      toast.error("Password Cannot Be Empty", {
+        style: toastStyle,
+        duration: 6000,
+      });
+      return;
+    }
+
     try {
       await signUp(email.current.value, password.current.value);
     } catch (error) {
@@ -54,32 +57,13 @@ const Signup = () => {
                 <h3>Confirm Password</h3>
               </li>
               <li>
-                <input type="password" ref={confirmPassword}></input>
+                <input type="password"></input>
               </li>
               <li>
                 <button
                   type="button"
                   className="login-button"
-                  onClick={() => {
-                    if (passwordMatch) {
-                      if (password === "" || passwordMatch === "") {
-                        toast.error("Password Cannot Be Empty", {
-                          style: {
-                            backgroundColor: "#012e55",
-                            color: "#2cdd82",
-                          },
-                          duration: 6000,
-                        });
-                      } else {
-                        handleSignUp(email, password);
-                      }
-                    } else {
-                      toast.error("Passwords Do Not Match", {
-                        style: { backgroundColor: "#012e55", color: "#2cdd82" },
-                        duration: 6000,
-                      });
-                    }
-                  }}
+                  onClick={handleSignUp}
                 >
                   Register
                 </button>

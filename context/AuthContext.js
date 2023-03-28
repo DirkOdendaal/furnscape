@@ -22,6 +22,7 @@ const googleProvider = new GoogleAuthProvider();
 export const useAuth = () => useContext(Context);
 
 export const AuthContextProvider = ({ children }) => {
+  const toastStyle = { backgroundColor: "#012e55", color: "#2cdd82" };
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -43,7 +44,7 @@ export const AuthContextProvider = ({ children }) => {
     signInWithPopup(auth, googleProvider)
       .then(() => {
         toast.success("Logged in!", {
-          style: { backgroundColor: "#012e55", color: "#2cdd82" },
+          style: toastStyle,
         });
         router.push(currentRoute);
       })
@@ -59,13 +60,14 @@ export const AuthContextProvider = ({ children }) => {
   const signUp = async (email, password) => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        toast.success(
-          "Signed Up.\n\nVerificaton email has been sent to you!",
-          {
-            style: { backgroundColor: "#012e55", color: "#2cdd82" },
-            duration: 6000,
-          }
-        );
+        toast.success("Signed Up!", {
+          style: toastStyle,
+          duration: 6000,
+        });
+        toast.success("Verificaton email has been sent to you!", {
+          style: toastStyle,
+          duration: 6000,
+        });
         router.push(currentRoute);
       })
       .catch((error) => {
@@ -73,19 +75,19 @@ export const AuthContextProvider = ({ children }) => {
         switch (errorMessage) {
           case "Firebase: Error (auth/invalid-email).":
             toast.error("Invalid Email", {
-              style: { backgroundColor: "#012e55", color: "#2cdd82" },
+              style: toastStyle,
               duration: 6000,
             });
             break;
           case "Firebase: Error (auth/email-already-in-use).":
             toast.error("Email Already Registered", {
-              style: { backgroundColor: "#012e55", color: "#2cdd82" },
+              style: toastStyle,
               duration: 6000,
             });
             break;
           default:
             toast.error(`${errorMessage}`, {
-              style: { backgroundColor: "#012e55", color: "#2cdd82" },
+              style: toastStyle,
               duration: 6000,
             });
             break;
@@ -97,7 +99,7 @@ export const AuthContextProvider = ({ children }) => {
     await signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         toast.success("Logged in!", {
-          style: { backgroundColor: "#012e55", color: "#2cdd82" },
+          style: toastStyle,
         });
         router.push(currentRoute);
       })
@@ -106,25 +108,25 @@ export const AuthContextProvider = ({ children }) => {
         switch (errorMessage) {
           case "Firebase: Error (auth/invalid-email).":
             toast.error("Invalid Email", {
-              style: { backgroundColor: "#012e55", color: "#2cdd82" },
+              style: toastStyle,
               duration: 6000,
             });
             break;
           case "Firebase: Error (auth/wrong-password).":
             toast.error("Incorrect Password", {
-              style: { backgroundColor: "#012e55", color: "#2cdd82" },
+              style: toastStyle,
               duration: 6000,
             });
             break;
           case "Firebase: Error (auth/user-not-found).":
             toast.error("No Such User", {
-              style: { backgroundColor: "#012e55", color: "#2cdd82" },
+              style: toastStyle,
               duration: 6000,
             });
             break;
           default:
             toast.error(`${errorMessage}`, {
-              style: { backgroundColor: "#012e55", color: "#2cdd82" },
+              style: toastStyle,
               duration: 6000,
             });
             break;
@@ -136,7 +138,7 @@ export const AuthContextProvider = ({ children }) => {
     return await sendPasswordResetEmail(auth, email)
       .then(() => {
         toast.success("Reset Email Sent.", {
-          style: { backgroundColor: "#012e55", color: "#2cdd82" },
+          style: toastStyle,
           duration: 6000,
         });
       })
@@ -145,25 +147,25 @@ export const AuthContextProvider = ({ children }) => {
         switch (errorMessage) {
           case "Firebase: Error (auth/missing-email).":
             toast.error("Missing Email Address.", {
-              style: { backgroundColor: "#012e55", color: "#2cdd82" },
+              style: toastStyle,
               duration: 6000,
             });
             break;
           case "Firebase: Error (auth/invalid-email).":
             toast.error("Invalid Email Address", {
-              style: { backgroundColor: "#012e55", color: "#2cdd82" },
+              style: toastStyle,
               duration: 6000,
             });
             break;
           case "Firebase: Error (auth/user-not-found).":
             toast.error("No Such User", {
-              style: { backgroundColor: "#012e55", color: "#2cdd82" },
+              style: toastStyle,
               duration: 6000,
             });
             break;
           default:
             toast.error(`${errorMessage}`, {
-              style: { backgroundColor: "#012e55", color: "#2cdd82" },
+              style: toastStyle,
               duration: 6000,
             });
             break;
@@ -175,7 +177,7 @@ export const AuthContextProvider = ({ children }) => {
     setUser(null);
     await signOut(auth);
     toast.success("Logged Out", {
-      style: { backgroundColor: "#012e55", color: "#2cdd82" },
+      style: toastStyle,
       duration: 6000,
     });
     router.push("/");
@@ -245,5 +247,6 @@ export const handleUserProfile = async (userAuth, setUser) => {
       role: user.role,
     });
   }
+
   return userRef;
 };

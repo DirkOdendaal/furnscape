@@ -15,7 +15,6 @@ export const StateContext = ({ children }) => {
   const [currentRoute, setCurrentRoute] = useState("/");
 
   let foundProduct;
-  let index;
 
   const onAdd = (product, quantity) => {
     foundProduct = cartItems.find((item) => item._id === product._id);

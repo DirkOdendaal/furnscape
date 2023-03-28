@@ -5,22 +5,20 @@ import Image from "next/image";
 
 const Product = ({ product: { images, name, id, price } }) => {
   return (
-    <div>
-      <Link href={`/product/${id}`}>
-        <div className="product-card">
-          <Image
-            src={images[0]}
-            className="product-image"
-            width={150}
-            height={150}
-            alt={""}
-          ></Image>
-          <p className="product-name">{name}</p>
-          <p className="product-price">R{price}</p>
-          {/* <p className="product-price"><AiFillStar/> 3.5 (20)</p> */}
-        </div>
-      </Link>
-    </div>
+    <Link href={`/product/${id}`}>
+      <div className="product-card">
+        <Image
+          src={images[0]}
+          className="product-image"
+          width={150}
+          height={150}
+          alt={""}
+        ></Image>
+        <p className="product-name">{name}</p>
+        <p className="product-price">R{price}</p>
+        {/* <p className="product-price"><AiFillStar/> 3.5 (20)</p> */}
+      </div>
+    </Link>
   );
 };
 

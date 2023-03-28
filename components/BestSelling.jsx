@@ -7,25 +7,49 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../config/firebase";
-import { Product } from "./";
+import { Product, Loading, Error } from "./";
 
-const BestSelling = () => {
-  const [bestSellingProducts, setBestSelling] = useState();
+//you can reuse this component when querying spesific producs like chairs or couches. You can spesify the props when loading for other components
+const BestSelling = ({ collectionRef, queryOptions }) => {
+  const [bestSellingProducts, setBestSelling] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const collectionRef = collection(db, "products");
-    const q = query(collectionRef, limit(16), orderBy("sold", "desc"));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      setBestSelling(
-        querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-      );
-    });
+    setIsLoading(true);
+
+    const q = query(collectionRef, ...queryOptions);
+
+    const unsubscribe = onSnapshot(
+      q,
+      (querySnapshot) => {
+        setBestSelling(
+          querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        );
+
+        setIsLoading(false);
+        setError(null);
+      },
+      (err) => {
+        setIsLoading(false);
+        setError(err);
+      }
+    );
 
     return unsubscribe;
   }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error message={error.message} />;
+  }
 
   return (
     <div className="product-grid">
@@ -39,6 +63,11 @@ const BestSelling = () => {
       </div>
     </div>
   );
+};
+
+BestSelling.defaultProps = {
+  collectionRef: collection(db, "products"),
+  queryOptions: [limit(16), orderBy("sold", "desc")],
 };
 
 export default BestSelling;
