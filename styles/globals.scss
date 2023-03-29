@@ -497,7 +497,7 @@ button:hover {
   border: 1px solid #ccc;
   width: 170px;
   height: 220px;
-  box-shadow: 0px 2px 10px 0px rgba(1, 46, 85, 0.3);
+  box-shadow: 0px 2px 10px 0px rgba(1, 46, 85, 0.5);
   padding: 10px;
   background-color: white;
   @media (max-width: 520px) {
@@ -1348,6 +1348,7 @@ button:hover {
 
 .slider-buttons button {
   background-color: transparent;
+  color: #012e55;
   border: none;
   z-index: 15;
   width: 50px;

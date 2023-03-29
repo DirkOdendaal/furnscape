@@ -62,6 +62,7 @@ const HeroBanner = () => {
               layout="fill"
               objectFit="cover"
               alt={""}
+              priority
             ></Image>
           </SwiperSlide>
           <SwiperSlide>
@@ -70,6 +71,7 @@ const HeroBanner = () => {
               layout="fill"
               objectFit="cover"
               alt={""}
+              priority
             ></Image>
           </SwiperSlide>
           <SwiperSlide>
@@ -78,6 +80,7 @@ const HeroBanner = () => {
               layout="fill"
               objectFit="cover"
               alt={""}
+              priority
             ></Image>
           </SwiperSlide>
           <SwiperSlide>
@@ -86,6 +89,7 @@ const HeroBanner = () => {
               layout="fill"
               objectFit="cover"
               alt={""}
+              priority
             ></Image>
           </SwiperSlide>
           <SwiperSlide>
@@ -94,6 +98,7 @@ const HeroBanner = () => {
               layout="fill"
               objectFit="cover"
               alt={""}
+              priority
             ></Image>
           </SwiperSlide>
           <SwiperSlide>
@@ -102,6 +107,7 @@ const HeroBanner = () => {
               layout="fill"
               objectFit="cover"
               alt={""}
+              priority
             ></Image>
           </SwiperSlide>
           <div className="autoplay-progress" slot="container-end">
