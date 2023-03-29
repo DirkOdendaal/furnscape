@@ -1,10 +1,12 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const Context = createContext();
 
 export const StateContext = ({ children }) => {
   const [catagories, setCatagories] = useState(null);
+  const [queriedProducts, setQueriedProducts] = useState();
   const [showCart, setShowCart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -13,6 +15,11 @@ export const StateContext = ({ children }) => {
   const [qty, setQty] = useState(1);
   const [showReviewPopup, setReviewPopUp] = useState(false);
   const [currentRoute, setCurrentRoute] = useState("/");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (queriedProducts) router.push("/QueriedProducts");
+  }, [queriedProducts]);
 
   let foundProduct;
 
@@ -106,6 +113,8 @@ export const StateContext = ({ children }) => {
         qty,
         showReviewPopup,
         currentRoute,
+        queriedProducts,
+        setQueriedProducts,
         incQuantity,
         setCatagories,
         decQuantity,

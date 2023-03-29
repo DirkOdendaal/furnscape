@@ -5,7 +5,6 @@ import { FreeMode, Navigation } from "swiper";
 import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
-  BsHddNetwork,
 } from "react-icons/bs";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -33,7 +32,6 @@ const ProductCarousel = ({ products }) => {
       <div className="slider-div">
         <Swiper
           freeMode={true}
-          cssMode={true}
           grabCursor={true}
           modules={[FreeMode, Navigation]}
           className="product-slider"

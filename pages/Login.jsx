@@ -62,6 +62,11 @@ const Login = () => {
                     <span>Forgot Password?</span>
                   </Link>
                 </li>
+                <li className="password-reset">
+                  <Link href="/Signup">
+                    <span>Dont have an account yet? Create one!</span>
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>

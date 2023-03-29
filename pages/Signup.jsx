@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
+import Link from "next/link";
 
 const Signup = () => {
   const toastStyle = { backgroundColor: "#012e55", color: "#2cdd82" };
@@ -80,6 +81,11 @@ const Signup = () => {
                 >
                   Sign In with Google
                 </button>
+              </li>
+              <li className="password-reset">
+                <Link href="/Login">
+                  <span>Already have an account? Login here!</span>
+                </Link>
               </li>
             </ul>
           </div>

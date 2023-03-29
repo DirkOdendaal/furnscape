@@ -29,7 +29,6 @@ const EditProduct = () => {
   const [price, setPrice] = useState(0);
   const [name, setName] = useState();
   const router = useRouter();
-  const { productSlug } = router.query;
 
   const handleUpload = async () => {
     const productsRef = collection(db, "products/");

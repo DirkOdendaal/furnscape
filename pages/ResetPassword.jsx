@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthContext";
 
 const ResetPassword = () => {
@@ -6,6 +7,14 @@ const ResetPassword = () => {
   const { resetPassword } = useAuth();
 
   const handelReset = async (email) => {
+    const { user } = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+      if (user) {
+        router.push("/");
+      }
+    }, [router, user]);
     try {
       await resetPassword(email.current.value).then(() => {
         console.log("Logged In");

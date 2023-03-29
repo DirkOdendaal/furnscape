@@ -16,7 +16,7 @@ const Product = ({ product: { images, name, id, price } }) => {
         ></Image>
         <p className="product-name">{name}</p>
         <p className="product-price">R{price}</p>
-        {/* <p className="product-price"><AiFillStar/> 3.5 (20)</p> */}
+        {/* <p className="product-price"><AiFillStar color="yellow"/> 3.5 (20)</p> */}
       </div>
     </Link>
   );

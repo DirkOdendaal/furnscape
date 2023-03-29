@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   collection,
   query,
@@ -22,7 +22,6 @@ const getProducts = async (collectionRef, queryOptions) => {
 };
 
 const Home = ({ bestSelling }) => {
-  console.log("Home");
   return (
     <>
       <HeroBanner />
