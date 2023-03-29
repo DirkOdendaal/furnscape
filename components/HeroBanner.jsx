@@ -28,7 +28,7 @@ const HeroBanner = () => {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [catagories]);
 
   return (
     <div className="hero-banner-container">
@@ -57,59 +57,42 @@ const HeroBanner = () => {
           modules={[Autoplay, Pagination, Navigation]}
         >
           <SwiperSlide>
-            <Image
+            <img
               src="/furnscape/CarouselImage1.jpg"
-              layout="fill"
-              objectFit="cover"
-              alt={""}
-              priority
-            ></Image>
+              className="swiper-img"
+            ></img>
           </SwiperSlide>
           <SwiperSlide>
-            <Image
+            <img
               src="/furnscape/CarouselImage2.jpg"
-              layout="fill"
-              objectFit="cover"
-              alt={""}
-              priority
-            ></Image>
+              className="swiper-img"
+            ></img>
           </SwiperSlide>
           <SwiperSlide>
-            <Image
+            <img
               src="/furnscape/CarouselImage3.jpg"
-              layout="fill"
-              objectFit="cover"
-              alt={""}
-              priority
-            ></Image>
+              className="swiper-img"
+            ></img>
           </SwiperSlide>
           <SwiperSlide>
-            <Image
+            <img
               src="/furnscape/CarouselImage4.jpg"
-              layout="fill"
-              objectFit="cover"
-              alt={""}
-              priority
-            ></Image>
+              className="swiper-img"
+            ></img>
           </SwiperSlide>
           <SwiperSlide>
-            <Image
+            <img
               src="/furnscape/CarouselImage5.jpg"
-              layout="fill"
-              objectFit="cover"
-              alt={""}
-              priority
-            ></Image>
+              className="swiper-img"
+            ></img>
           </SwiperSlide>
           <SwiperSlide>
-            <Image
+            <img
               src="/furnscape/CarouselImage6.jpg"
-              layout="fill"
-              objectFit="cover"
-              alt={""}
-              priority
-            ></Image>
+              className="swiper-img"
+            ></img>
           </SwiperSlide>
+
           <div className="autoplay-progress" slot="container-end">
             <span ref={progressContent}></span>
           </div>
