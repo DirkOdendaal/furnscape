@@ -7,7 +7,6 @@ import { useStateContext } from "../context/StateContext";
 import Category from "./Category";
 
 import "swiper/css";
-import Image from "next/image";
 
 const HeroBanner = () => {
   const { catagories, setCatagories } = useStateContext();

@@ -1,38 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { IoMdArrowDropright } from "react-icons/io";
-import {
-  collection,
-  query,
-  limit,
-  onSnapshot,
-  orderBy,
-  where,
-} from "firebase/firestore";
-import { db } from "../config/firebase";
-import { useStateContext } from "../context/StateContext";
-
+import Link from "next/link";
 
 const Category = ({ category }) => {
-  const { setQueriedProducts } = useStateContext();
-
-  const handleSubCatClick = (subCat) => {
-    const queryOptions = [
-      limit(16),
-      orderBy("sold", "desc"),
-      where("catagory.subCat", "==", `${subCat}`),
-    ];
-    const collectionRef = collection(db, "products");
-    const q = query(collectionRef, ...queryOptions);
-
-    onSnapshot(q, (querySnapshot) => {
-      setQueriedProducts(
-        querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-      );
-    });
-  };
+  const fieldToFilter = "catagory.subCat";
 
   return (
     <li>
@@ -42,14 +13,15 @@ const Category = ({ category }) => {
       </div>
       {category.subCategories && (
         <ul className="hero-card">
-          {category.subCategories.map((subCat, index) => (
-            <li
-              key={`${index}-${subCat}`}
-              onClick={() => handleSubCatClick(subCat)}
-            >
-              {subCat}
-            </li>
-          ))}
+          {category.subCategories.map((subCat, index) => {
+            return (
+              <Link
+                href={`/queriedProducts?order=desc&field=sold&item=${fieldToFilter}&filter=${subCat}`}
+              >
+                <li key={`${index}`}>{subCat}</li>
+              </Link>
+            );
+          })}
         </ul>
       )}
     </li>

@@ -475,6 +475,13 @@ button:hover {
   color: #012e55;
 }
 
+.queried-header {
+  padding: 20px 0px 0px;
+  display: flex;
+  justify-content: center;
+  color: #012e55;
+}
+
 /* Products */
 .products-container {
   display: flex;
@@ -1088,7 +1095,6 @@ button:hover {
 
 .hero-details-card {
   border: none;
-  padding: 0%;
   margin: 0%;
   background-color: white;
 }
@@ -1287,6 +1293,9 @@ button:hover {
   display: flex;
   overflow: hidden;
   position: relative;
+  @media (max-height: 920px) {
+    height: 400px;
+  }
 }
 
 .carousel-container:hover .carousel-buttons {
@@ -1328,12 +1337,24 @@ button:hover {
 }
 
 .slider-div {
-  padding: 10px 50px;
+  padding: 10px 20px;
   position: relative;
+}
+
+.hero-banner-container .swiper-slide {
+  padding: 0px;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .swiper-slide {
   padding: 15px 0px;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .slider-buttons {
@@ -1343,7 +1364,7 @@ button:hover {
   position: absolute;
   top: 0;
   height: 100%;
-  width: calc(100vw - 100px);
+  width: calc(100vw - 40px);
 }
 
 .slider-buttons button {
