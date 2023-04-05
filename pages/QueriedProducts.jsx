@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Product } from "../components";
-import { useRouter } from "next/router";
 import {
   collection,
   query,
@@ -11,10 +10,9 @@ import {
 } from "firebase/firestore";
 import { db } from "../config/firebase";
 
-const QueriedProducts = () => {
+const QueriedProducts = ({ urlParams }) => {
+  const { order, field, item, filter } = urlParams;
   const [queriedProducts, setQueriedProducts] = useState();
-  const router = useRouter();
-  const { order, field, item, filter } = router.query;
 
   const collectionRef = collection(db, "products");
   const productQuery = [
@@ -47,6 +45,11 @@ const QueriedProducts = () => {
       </div>
     </div>
   );
+};
+
+QueriedProducts.getInitialProps = async ({ query }) => {
+  const urlParams = query;
+  return { urlParams };
 };
 
 export default QueriedProducts;

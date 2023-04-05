@@ -16,9 +16,27 @@ const Category = ({ category }) => {
           {category.subCategories.map((subCat, index) => {
             return (
               <Link
-                href={`/queriedProducts?order=desc&field=sold&item=${fieldToFilter}&filter=${subCat}`}
+                key={`${index}`}
+                href={{
+                  pathname: "/QueriedProducts",
+                  query: {
+                    order: "desc",
+                    field: "sold",
+                    item: fieldToFilter,
+                    filter: subCat,
+                  },
+                }}
+                as={{
+                  pathname: "/QueriedProducts",
+                  query: {
+                    order: "desc",
+                    field: "sold",
+                    item: fieldToFilter,
+                    filter: subCat,
+                  },
+                }}
               >
-                <li key={`${index}`}>{subCat}</li>
+                <li>{subCat}</li>
               </Link>
             );
           })}
