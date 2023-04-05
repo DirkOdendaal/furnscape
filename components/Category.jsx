@@ -15,31 +15,11 @@ const Category = ({ category }) => {
         <ul className="hero-card">
           {category.subCategories.map((subCat, index) => {
             return (
-              <li>
-                <Link
-                  key={`${index}`}
-                  href={{
-                    pathname: "/QueriedProducts",
-                    query: {
-                      order: "desc",
-                      field: "sold",
-                      item: fieldToFilter,
-                      filter: subCat,
-                    },
-                  }}
-                  as={{
-                    pathname: "/QueriedProducts",
-                    query: {
-                      order: "desc",
-                      field: "sold",
-                      item: fieldToFilter,
-                      filter: subCat,
-                    },
-                  }}
-                >
-                  {subCat}
-                </Link>
-              </li>
+              <Link
+                href={`/queriedProducts?order=desc&field=sold&item=${fieldToFilter}&filter=${subCat}`}
+              >
+                <li key={`${index}`}>{subCat}</li>
+              </Link>
             );
           })}
         </ul>
