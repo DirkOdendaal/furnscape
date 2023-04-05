@@ -41,7 +41,7 @@ const Navbar = () => {
           <Image
             src="/furnscape/fs6.jpeg"
             width={190}
-            height={0}
+            height={33}
             alt={""}
             priority
           ></Image>
