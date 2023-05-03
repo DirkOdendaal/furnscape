@@ -124,15 +124,15 @@ const ProductDetails = () => {
           <p className="price">R{product?.price}</p>
           <div className="quantity">
             <h3>Quantity:</h3>
-            <p className="quantity-desc">
-              <span className="minus" onClick={decQuantity}>
-                <AiOutlineMinus />
-              </span>
-              <span className="num">{qty}</span>
-              <span className="plus" onClick={incQuantity}>
-                <AiOutlinePlus />
-              </span>
-            </p>
+            <div className="quantity-desc">
+              <button className="minus" onClick={decQuantity}>
+                <AiOutlineMinus size={20} />
+              </button>
+              <span>{qty}</span>
+              <button className="plus" onClick={incQuantity}>
+                <AiOutlinePlus size={20} />
+              </button>
+            </div>
           </div>
           <div className="buttons">
             <button

@@ -42,15 +42,13 @@ const Cart = () => {
           <div className="empty-cart">
             <AiOutlineShoppingCart size={150} />
             <h3>Your Shopping Cart Is Empty</h3>
-            <Link href="/">
-              <button
-                type="button"
-                onClick={() => setShowCart(false)}
-                className="btn"
-              >
-                Continue Shopping
-              </button>
-            </Link>
+            <button
+              type="button"
+              onClick={() => setShowCart(false)}
+              className="btn"
+            >
+              Continue Shopping
+            </button>
           </div>
         )}
 
@@ -73,25 +71,25 @@ const Cart = () => {
                   </div>
                   <div className="flex bottom">
                     <div>
-                      <p className="quantity-desc">
-                        <span
+                      <div className="quantity-desc">
+                        <button
                           className="minus"
                           onClick={() =>
                             toggleCartItemQuantity(item._id, "dec")
                           }
                         >
-                          <AiOutlineMinus />
-                        </span>
-                        <span className="num">{item.quantity}</span>
-                        <span
+                          <AiOutlineMinus size={20} />
+                        </button>
+                        <span>{item.quantity}</span>
+                        <button
                           className="plus"
                           onClick={() =>
                             toggleCartItemQuantity(item._id, "inc")
                           }
                         >
-                          <AiOutlinePlus />
-                        </span>
-                      </p>
+                          <AiOutlinePlus size={20} />
+                        </button>
+                      </div>
                     </div>
                     <button
                       className="remove-item"

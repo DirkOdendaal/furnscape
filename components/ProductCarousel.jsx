@@ -35,7 +35,6 @@ const ProductCarousel = ({ products }) => {
           grabCursor={true}
           modules={[FreeMode, Navigation]}
           className="product-slider"
-          spaceBetween={5}
           breakpoints={{
             0: {
               slidesPerView: 2,

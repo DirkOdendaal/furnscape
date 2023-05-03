@@ -5,6 +5,7 @@ html,
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
+
 ::-webkit-scrollbar {
   width: 0px;
 }
@@ -38,6 +39,7 @@ h1 {
   0% {
     transform: translateX(-25%);
   }
+
   100% {
     transform: translateX(25%);
   }
@@ -110,6 +112,7 @@ button:hover {
   margin: 0px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
+
   @media (max-width: 450px) {
     width: 350px;
   }
@@ -144,9 +147,11 @@ button:hover {
   #nav-button {
     display: none;
   }
+
   #hero-nav {
     display: none;
   }
+
   #filter-reviews {
     display: none;
   }
@@ -300,6 +305,7 @@ button:hover {
   background: transparent;
   border: none;
 }
+
 .product .cart-product-image {
   border-radius: 15px;
   background-color: #ebebeb;
@@ -384,6 +390,7 @@ button:hover {
   gap: 10px;
   justify-content: center;
 }
+
 .footer-container .icons {
   font-size: 30px;
   display: flex;
@@ -432,6 +439,7 @@ button:hover {
 .login-list {
   list-style: none;
 }
+
 .login-list li {
   padding: 10px;
 }
@@ -507,6 +515,7 @@ button:hover {
   box-shadow: 0px 2px 10px 0px rgba(1, 46, 85, 0.5);
   padding: 10px;
   background-color: white;
+
   @media (max-width: 520px) {
     width: 125px;
   }
@@ -556,6 +565,7 @@ button:hover {
   padding-bottom: 50px;
   margin: 10px;
   background-color: white;
+
   @media (min-width: 1100px) {
     min-width: 1100px;
   }
@@ -607,6 +617,7 @@ button:hover {
   padding: 5px;
   margin: 2px;
 }
+
 .small-image {
   border: 1px solid grey;
   cursor: pointer;
@@ -635,33 +646,7 @@ button:hover {
   margin-top: 30px;
 }
 
-.quantity-desc {
-  margin-left: 5px;
-  margin-right: 5px;
-  border: 1px solid gray;
-  padding: 6px;
-  display: inline-block;
-}
 
-.quantity-desc span {
-  font-size: 16px;
-  padding: 6px 12px;
-  cursor: pointer;
-}
-
-.quantity-desc .minus {
-  color: #0fa3b1;
-}
-
-.quantity-desc .num {
-  border-right: 1px solid gray;
-  border-left: 1px solid gray;
-  font-size: 20px;
-}
-
-.quantity-desc .plus {
-  color: rgb(49, 168, 49);
-}
 
 .buttons .add-to-cart {
   padding: 10px 20px;
@@ -837,6 +822,7 @@ button:hover {
 .account-details-card {
   margin: 20px;
   color: #012e55;
+
   @media (max-width: 500px) {
     margin: 10px;
   }
@@ -935,6 +921,7 @@ button:hover {
   border-bottom: solid 1px #dadada;
   padding: 10px;
   width: 100%;
+
   @media (max-width: 800px) {
     flex-direction: column;
   }
@@ -1002,7 +989,7 @@ button:hover {
   position: relative;
   padding: 15px 0 0;
   margin-top: 10px;
-  width: 80%;
+  width: 100%;
 }
 
 .form__field {
@@ -1013,7 +1000,7 @@ button:hover {
   outline: 0;
   font-size: 1rem;
   color: #012e55;
-  padding: 7px 0;
+  padding: 7px 5px;
   background: transparent;
   transition: border-color 0.2s;
 
@@ -1021,7 +1008,7 @@ button:hover {
     color: transparent;
   }
 
-  &:placeholder-shown ~ .form__label {
+  &:placeholder-shown~.form__label {
     font-size: 1rem;
     cursor: text;
     top: 20px;
@@ -1039,7 +1026,7 @@ button:hover {
 }
 
 .form__field:focus {
-  ~ .form__label {
+  ~.form__label {
     position: absolute;
     top: 0;
     display: block;
@@ -1048,6 +1035,7 @@ button:hover {
     color: #012e55;
     font-weight: 700;
   }
+
   display: flex;
   flex-wrap: wrap;
   padding-bottom: 6px;
@@ -1058,6 +1046,7 @@ button:hover {
 }
 
 .form__field {
+
   &:required,
   &:invalid {
     box-shadow: none;
@@ -1281,6 +1270,8 @@ button:hover {
   width: 100vw;
 }
 
+
+
 .address-allignment {
   display: flex;
   align-items: center;
@@ -1293,6 +1284,7 @@ button:hover {
   display: flex;
   overflow: hidden;
   position: relative;
+
   @media (max-height: 920px) {
     height: 400px;
   }
@@ -1380,4 +1372,107 @@ button:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.quantity-desc {
+  display: flex;
+  font-size: 16px;
+  margin: 10px 5px 0px 5px;
+}
+
+.nav-cart-button:hover {
+  color: #2cdd82;
+}
+
+.quantity-desc button {
+  width: 50px;
+  height: 40px;
+  border: 1px solid #012e55;
+  background-color: white;
+  color: #012e55;
+}
+
+.quantity-desc span {
+  padding: 6px 12px;
+  border-top: 1px solid #012e55;
+  border-bottom: 1px solid #012e55;
+}
+
+.quantity-desc .minus {
+  color: #0fa3b1;
+}
+
+.quantity-desc .num {
+  font-size: 20px;
+}
+
+.quantity-desc .plus {
+  color: rgb(49, 168, 49);
+}
+
+.product-filter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 10px 0px rgba(1, 46, 85, 0.5);
+  margin: 20px 0px 0px 0px;
+  width: 300px;
+  background-color: white;
+}
+
+.product-filter-header {
+  padding: 10px 0px 10px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  background-color: #012e55;
+  color: #2cdd82;
+}
+
+.queried-product-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0px 20px;
+}
+
+.filter-drawer-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.filter-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px 20px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #012e55;
+}
+
+.filter-drawer-header-opened {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px 20px;
+  background-color: transparent;
+  border: none;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.07);
+}
+
+.filter-drawer {
+  padding: 20px;
+}
+
+.range-filter-labels {
+  display: flex;
+  justify-content: space-between;
 }

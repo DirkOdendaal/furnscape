@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Product } from "../components";
+import { QueriedProductsFilter } from "../components";
 import {
   collection,
   query,
@@ -13,13 +14,10 @@ import { db } from "../config/firebase";
 const QueriedProducts = ({ urlParams }) => {
   const { order, field, item, filter } = urlParams;
   const [queriedProducts, setQueriedProducts] = useState();
+  const [filterProducts, setFilterProducts] = useState();
 
   const collectionRef = collection(db, "products");
-  const productQuery = [
-    limit(16),
-    orderBy(field, order),
-    where(item, "==", filter),
-  ];
+  const productQuery = [orderBy(field, order), where(item, "==", filter)];
 
   useEffect(() => {
     const q = query(collectionRef, ...productQuery);
@@ -33,15 +31,27 @@ const QueriedProducts = ({ urlParams }) => {
     });
   }, []);
 
+  useEffect(() => {
+    if (queriedProducts) {
+      setFilterProducts(queriedProducts);
+    }
+  }, [queriedProducts]);
+
   return (
-    <div className="product-grid">
+    <div>
       <div className="queried-header">
         <h2>{filter}</h2>
       </div>
-      <div className="products-container">
-        {queriedProducts?.map((product) => (
-          <Product key={product.id} product={product} />
-        ))}
+      <div className="queried-product-grid">
+        <QueriedProductsFilter
+          queriedProducts={queriedProducts}
+          setFilterProducts={setFilterProducts}
+        />
+        <div className="products-container">
+          {filterProducts?.map((product) => (
+            <Product key={product.id} product={product} />
+          ))}
+        </div>
       </div>
     </div>
   );
