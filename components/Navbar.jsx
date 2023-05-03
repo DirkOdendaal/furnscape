@@ -106,7 +106,7 @@ const Navbar = () => {
           className="navbar-buttons"
           onClick={() => setShowCart(true)}
         >
-          <AiOutlineShoppingCart />
+          <AiOutlineShoppingCart className="nav-cart-button"/>
           {totalQuantity > 0 ? (
             <span className="cart-item-qty">{totalQuantity}</span>
           ) : null}

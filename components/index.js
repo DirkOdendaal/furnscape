@@ -15,3 +15,5 @@ export { default as Category } from "./Category";
 export { default as Loading } from "./Loading";
 export { default as Error } from "./Error";
 export { default as ProductCarousel } from "./ProductCarousel";
+export { default as QueriedProductsFilter } from "./QueriedProductsFilter";
+export { default as FilterDrawer } from "./FilterDrawer";
