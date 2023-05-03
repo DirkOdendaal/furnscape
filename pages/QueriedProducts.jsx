@@ -31,6 +31,12 @@ const QueriedProducts = ({ urlParams }) => {
     });
   }, []);
 
+  useEffect(() => {
+    if (queriedProducts) {
+      setFilterProducts(queriedProducts);
+    }
+  }, [queriedProducts]);
+
   return (
     <div>
       <div className="queried-header">
@@ -42,7 +48,7 @@ const QueriedProducts = ({ urlParams }) => {
           setFilterProducts={setFilterProducts}
         />
         <div className="products-container">
-          {queriedProducts?.map((product) => (
+          {filterProducts?.map((product) => (
             <Product key={product.id} product={product} />
           ))}
         </div>

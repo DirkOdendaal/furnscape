@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
-import { FilterDrawer } from "../components";
+import { RangeFilter } from "../components";
 
 const QueriedProductsFilter = ({ queriedProducts, setFilterProducts }) => {
   const [prices, setPrices] = useState([]);
   const [priceRange, setPriceRange] = useState();
+  const [filterPriceRange, setfilterPriceRange] = useState();
 
   //set price list
   useEffect(() => {
@@ -17,23 +18,30 @@ const QueriedProductsFilter = ({ queriedProducts, setFilterProducts }) => {
   // Set initial Price Range
   useEffect(() => {
     if (prices.length) {
-      setPriceRange({ min: Math.min(...prices), max: Math.max(...prices) });
+      setPriceRange([Math.min(...prices), Math.max(...prices)]);
     }
   }, [prices]);
 
+  //Set new products to filtered products
   useEffect(() => {
-    if (priceRange) console.log(priceRange);
-  }, [priceRange]);
+    const filtered = queriedProducts?.filter(
+      (product) =>
+        product.price >= filterPriceRange[0] &&
+        product.price <= filterPriceRange[1]
+    );
+    setFilterProducts(filtered);
+  }, [filterPriceRange]);
 
   return (
     <div className="product-filter">
       <div className="product-filter-header">
         <h3>Filters</h3>
       </div>
-      <FilterDrawer
+      <RangeFilter
         title={"Price"}
         priceRange={priceRange}
-        setPriceRange={setPriceRange}
+        setfilterPriceRange={setfilterPriceRange}
+        filterPriceRange={filterPriceRange}
       />
     </div>
   );

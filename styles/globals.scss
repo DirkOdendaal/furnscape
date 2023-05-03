@@ -1469,7 +1469,10 @@ button:hover {
 }
 
 .filter-drawer {
-  padding: 5px 10px;
-  border: none;
-  border-bottom: 1px solid #012e55;
+  padding: 20px;
+}
+
+.range-filter-labels {
+  display: flex;
+  justify-content: space-between;
 }
