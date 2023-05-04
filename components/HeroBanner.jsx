@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
-import { query, collection } from "firebase/firestore";
+import { query, collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { useStateContext } from "../context/StateContext";
 import Category from "./Category";
