@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { doc, query, onSnapshot, getDoc, collection } from "firebase/firestore";
+import { doc, query, getDocs, getDoc, collection } from "firebase/firestore";
 import { Reviews, ReviewPopup } from "../../components";
 import { db } from "../../config/firebase";
 import {
@@ -47,19 +47,20 @@ const ProductDetails = () => {
     const reviewRef = collection(db, `products/${slug}`, "reviews");
     const q = query(reviewRef);
     getProduct();
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setReviews(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-      );
-    });
-
-    return () => {
-      unsubscribe;
-    };
+    getDocs(q)
+      .then((snapshot) => {
+        setReviews(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        );
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
   }, [slug]);
+
 
   useEffect(() => {
     if (product) setFocusedImg(product.images[0]);

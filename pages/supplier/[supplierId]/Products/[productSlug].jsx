@@ -3,7 +3,7 @@ import { AccountLayout } from "../../../../components";
 import {
   collection,
   query,
-  onSnapshot,
+  getDocs,
   addDoc,
   updateDoc,
   arrayUnion,
@@ -110,18 +110,18 @@ const EditProduct = () => {
   useEffect(() => {
     const collectionRef = collection(db, "catagories");
     const q = query(collectionRef);
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setCategoriesCollection(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-      );
-    });
-
-    return () => {
-      unsubscribe;
-    };
+    getDocs(q)
+      .then((snapshot) => {
+        setCategoriesCollection(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        );
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
   }, []);
 
   useEffect(() => {
