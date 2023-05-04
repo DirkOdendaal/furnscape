@@ -4,12 +4,10 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: ["main"]
   pull_request:
     branches: ["main"]
     types: [closed]
-
+    
 jobs:
   build:
     runs-on: ubuntu-latest
