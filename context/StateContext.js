@@ -13,6 +13,17 @@ export const StateContext = ({ children }) => {
   const [qty, setQty] = useState(1);
   const [showReviewPopup, setReviewPopUp] = useState(false);
   const [currentRoute, setCurrentRoute] = useState("/");
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (error) {
+      document.body.classList.add("error-bg");
+      document.body.classList.remove("normal-bg");
+    } else {
+      document.body.classList.add("normal-bg");
+      document.body.classList.remove("error-bg");
+    }
+  }, [error]);
 
   let foundProduct;
 
@@ -106,6 +117,7 @@ export const StateContext = ({ children }) => {
         qty,
         showReviewPopup,
         currentRoute,
+        error,
         incQuantity,
         setCatagories,
         decQuantity,
@@ -117,6 +129,7 @@ export const StateContext = ({ children }) => {
         toggleCartItemQuantity,
         onRemove,
         setCurrentRoute,
+        setError,
       }}
     >
       {children}
