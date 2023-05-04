@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "../../../../context/AuthContext";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineAddLocation } from "react-icons/md";
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, query } from "firebase/firestore";
 import { db } from "../../../../config/firebase";
 import { AccountLayout } from "../../../../components";
 import Link from "next/link";
@@ -23,18 +23,18 @@ const AddressBook = () => {
   useEffect(() => {
     const addressRef = collection(db, `users/${customerId}`, "addressBook");
     const q = query(addressRef);
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setAddressBook(
-        snapshot.docs.map((address) => ({
-          id: address.id,
-          ...address.data(),
-        }))
-      );
-    });
-
-    return () => {
-      unsubscribe;
-    };
+    getDocs(q)
+      .then((snapshot) => {
+        setAddressBook(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        );
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
   }, [customerId]);
 
   return (

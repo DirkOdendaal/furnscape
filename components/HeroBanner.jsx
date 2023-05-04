@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
-import { query, collection, onSnapshot } from "firebase/firestore";
+import { query, collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { useStateContext } from "../context/StateContext";
 import Category from "./Category";
@@ -15,19 +15,19 @@ const HeroBanner = () => {
   useEffect(() => {
     const catRef = collection(db, "catagories");
     const catq = query(catRef);
-    const unsubscribe = onSnapshot(catq, (snapshot) => {
-      setCatagories(
-        snapshot.docs.map((cat) => ({
-          id: cat.id,
-          ...cat.data(),
-        }))
-      );
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, [catagories]);
+    getDocs(catq)
+      .then((snapshot) => {
+        setCatagories(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        );
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+  }, []);
 
   return (
     <div className="hero-banner-container">

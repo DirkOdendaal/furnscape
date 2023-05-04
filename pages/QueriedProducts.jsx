@@ -5,7 +5,7 @@ import {
   collection,
   query,
   limit,
-  onSnapshot,
+  getDocs,
   orderBy,
   where,
 } from "firebase/firestore";
@@ -21,7 +21,7 @@ const QueriedProducts = ({ urlParams }) => {
 
   useEffect(() => {
     const q = query(collectionRef, ...productQuery);
-    onSnapshot(q, (querySnapshot) => {
+    getDocs(q).then((querySnapshot) => {
       setQueriedProducts(
         querySnapshot.docs.map((doc) => ({
           id: doc.id,

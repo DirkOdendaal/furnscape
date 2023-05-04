@@ -2,7 +2,7 @@ import {
   collection,
   query,
   where,
-  onSnapshot,
+  getDocs,
   deleteDoc,
   doc,
   orderBy,
@@ -54,17 +54,18 @@ const Products = () => {
     if (user) {
       const productRef = collection(db, `products`);
       const productQuery = query(productRef, where("user", "==", user.uid));
-      const unsubscribe = onSnapshot(productQuery, (snapshot) => {
-        setProductList(
-          snapshot.docs.map((product) => ({
-            _id: product.id,
-            ...product.data(),
-          }))
-        );
-      });
-      return () => {
-        unsubscribe;
-      };
+      getDocs(productQuery)
+        .then((snapshot) => {
+          setProductList(
+            snapshot.docs.map((product) => ({
+              _id: product.id,
+              ...product.data(),
+            }))
+          );
+        })
+        .catch((error) => {
+          console.log("Error getting documents: ", error);
+        });
     }
   }, [user]);
 

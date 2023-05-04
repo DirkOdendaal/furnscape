@@ -17,7 +17,12 @@ const Navbar = () => {
     setShowMenu,
     totalQuantity,
     setCurrentRoute,
+    error,
   } = useStateContext();
+
+  if (error) {
+    return null;
+  }
 
   return (
     <div className="navbar-container">
@@ -106,7 +111,7 @@ const Navbar = () => {
           className="navbar-buttons"
           onClick={() => setShowCart(true)}
         >
-          <AiOutlineShoppingCart className="nav-cart-button"/>
+          <AiOutlineShoppingCart className="nav-cart-button" />
           {totalQuantity > 0 ? (
             <span className="cart-item-qty">{totalQuantity}</span>
           ) : null}

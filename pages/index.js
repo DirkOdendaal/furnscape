@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  collection,
-  query,
-  limit,
-  onSnapshot,
-  orderBy,
-  getDocs,
-} from "firebase/firestore";
+import { collection, query, limit, orderBy, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
-import { HeroBanner, BestSelling, ProductCarousel } from "../components";
+import { HeroBanner, BestSelling, ProductCarousel, Error } from "../components";
+import { useStateContext } from "../context/StateContext";
 
 const getProducts = async (collectionRef, queryOptions) => {
   const q = query(collectionRef, ...queryOptions);
@@ -21,7 +15,15 @@ const getProducts = async (collectionRef, queryOptions) => {
   });
 };
 
-const Home = ({ bestSelling }) => {
+const Home = ({ bestSelling, error }) => {
+  const { setError } = useStateContext();
+
+  if (error) {
+    setError(true);
+
+    return <Error error={error} />;
+  }
+
   return (
     <>
       <HeroBanner />
@@ -34,11 +36,15 @@ const Home = ({ bestSelling }) => {
 
 Home.getInitialProps = async () => {
   const bestSellingCollectionRef = collection(db, "products");
-  const bestSelling = await getProducts(bestSellingCollectionRef, [
-    limit(16),
-    orderBy("sold", "desc"),
-  ]);
-  return { bestSelling };
+  try {
+    const bestSelling = await getProducts(bestSellingCollectionRef, [
+      limit(16),
+      orderBy("sold", "desc"),
+    ]);
+    return { bestSelling };
+  } catch (error) {
+    return { error };
+  }
 };
 
 export default Home;
