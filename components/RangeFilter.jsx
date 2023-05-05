@@ -34,8 +34,8 @@ const RangeFilter = ({
       >
         {title} {isOpened ? <AiOutlineMinus /> : <AiOutlinePlus />}
       </button>
-      <div className="filter-drawer">
-        <Collapse isOpened={isOpened}>
+      <Collapse isOpened={isOpened}>
+        <div className="filter-drawer">
           <Slider
             range
             allowCross={false}
@@ -43,6 +43,13 @@ const RangeFilter = ({
             max={priceRange[1]}
             defaultValue={[priceRange[0], priceRange[1]]}
             onChange={(value) => handelRangeChange(value)}
+            trackStyle={{ backgroundColor: "#2cdd82" }}
+            handleStyle={{
+              borderColor: "#012e55",
+              backgroundColor: "#012e55",
+              
+            }}
+            railStyle={{ backgroundColor: "#012e55" }}
           />
           <div className="range-filter-labels">
             <p>
@@ -52,8 +59,8 @@ const RangeFilter = ({
               R{filterPriceRange?.length ? filterPriceRange[1] : priceRange[1]}
             </p>
           </div>
-        </Collapse>
-      </div>
+        </div>
+      </Collapse>
     </div>
   );
 };
