@@ -1,6 +1,7 @@
 import React from "react";
 
-const Error = ({ message }) => {
+const Error = ({ error }) => {
+  
   return (
     <div>
       <div className="moon"></div>

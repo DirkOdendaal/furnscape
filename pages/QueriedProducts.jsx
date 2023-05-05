@@ -43,10 +43,10 @@ const QueriedProducts = ({ urlParams }) => {
         <h2>{filter}</h2>
       </div>
       <div className="queried-product-grid">
-        {/* <QueriedProductsFilter
+        <QueriedProductsFilter
           queriedProducts={queriedProducts}
           setFilterProducts={setFilterProducts}
-        /> */}
+        />
         <div className="products-container">
           {filterProducts?.map((product) => (
             <Product key={product.id} product={product} />

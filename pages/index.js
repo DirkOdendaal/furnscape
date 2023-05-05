@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { collection, query, limit, orderBy, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { HeroBanner, BestSelling, ProductCarousel, Error } from "../components";
 import { useStateContext } from "../context/StateContext";
+
 
 const getProducts = async (collectionRef, queryOptions) => {
   const q = query(collectionRef, ...queryOptions);
@@ -17,12 +18,12 @@ const getProducts = async (collectionRef, queryOptions) => {
 
 const Home = ({ bestSelling, error }) => {
   const { setError } = useStateContext();
+  
+  useEffect(() => {
+    if (error) setError(true);
+  }, [error]);
 
-  if (error) {
-    setError(true);
-
-    return <Error error={error} />;
-  }
+  if (error) return <Error error={error} />;
 
   return (
     <>

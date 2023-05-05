@@ -1841,3 +1841,7 @@ button:hover {
   border-top-right-radius: 8em;
   border-bottom: 4px solid #e67e22;
 }
+
+.rc-slider-handle-dragging {
+  box-shadow: 0 0 0 2px #2cdd82 !important;
+}
