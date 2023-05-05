@@ -1,7 +1,7 @@
 import React from "react";
 
-const Error = ({ error }) => {
-  
+const Error = ({ error: { errorTitle, p1, p2, p3, p4 } }) => {
+  console.log(errorTitle);
   return (
     <div>
       <div className="moon"></div>
@@ -14,18 +14,21 @@ const Error = ({ error }) => {
       <div className="star star4"></div>
       <div className="star star5"></div>
       <div className="error">
-        <div className="error__title">Error</div>
+        <div className="error__title">{errorTitle}</div>
         <div className="error__subtitle">Hmmm...</div>
         <div className="error__description">
-          It looks like the developer fell asleep.
+          {/*  */}
+          {p1}
         </div>
         <div className="error__description">
-          He dreams of having a database that's free.
+          {/* */}
+          {p2}
         </div>
         <div className="error__description">
-          Seeing Firebase has a call limit thats it for today.
+          {/* */}
+          {p3}
         </div>
-        <div className="error__description">Come back tomorrow!</div>
+        <div className="error__description">{p4}</div>
       </div>
     </div>
   );

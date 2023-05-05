@@ -4,7 +4,6 @@ import { db } from "../config/firebase";
 import { HeroBanner, BestSelling, ProductCarousel, Error } from "../components";
 import { useStateContext } from "../context/StateContext";
 
-
 const getProducts = async (collectionRef, queryOptions) => {
   const q = query(collectionRef, ...queryOptions);
   const querySnapshot = await getDocs(q);
@@ -18,12 +17,21 @@ const getProducts = async (collectionRef, queryOptions) => {
 
 const Home = ({ bestSelling, error }) => {
   const { setError } = useStateContext();
-  
+
   useEffect(() => {
     if (error) setError(true);
   }, [error]);
 
-  if (error) return <Error error={error} />;
+  if (error) {
+    const error = {
+      errorTitle: "Error",
+      p1: "This page does not exist.",
+      p2: "Please ensure you have the correct URL.",
+      p3: "Mayby try going to our home page?",
+      p4: "Come Back Tomorrow!",
+    };
+    return <Error error={error} />;
+  }
 
   return (
     <>
