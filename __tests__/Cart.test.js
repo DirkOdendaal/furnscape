@@ -23,6 +23,14 @@ const mockCartItems = [
   },
 ];
 
+// Mock the Next.js Image component
+jest.mock("next/image", () => {
+  return (props) => {
+    const { src, alt } = props;
+    return <img src={src} alt={alt} />;
+  };
+});
+
 describe("Cart component", () => {
   test("renders empty cart message when cart is empty", () => {
     render(
@@ -59,6 +67,7 @@ describe("Cart component", () => {
     expect(screen.queryByRole("complementary")).toBeInTheDocument();
 
     const closeButton = screen.getByTestId("close-button");
+
     userEvent.click(closeButton);
 
     await waitFor(() => {
