@@ -8,7 +8,6 @@ const Details = () => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(user);
     if (!user) {
       router.push("/Login");
     }

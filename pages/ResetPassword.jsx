@@ -17,7 +17,6 @@ const ResetPassword = () => {
     }, [router, user]);
     try {
       await resetPassword(email.current.value).then(() => {
-        console.log("Logged In");
       });
     } catch (error) {
       console.log(error);
