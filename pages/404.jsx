@@ -6,9 +6,8 @@ const FourOhFour = () => {
   const { setError } = useStateContext();
   const error = {
     errorTitle: "404",
-    p1: "It looks like the developer fell asleep.",
-    p2: "He dreams of having a database that's free. ",
-    p3: "Seeing Firebase has a call limit thats it for today. ",
+    p1: "It seems you have lost your way.",
+    p2: "Try going back to our home page.",
   };
 
   useEffect(() => {

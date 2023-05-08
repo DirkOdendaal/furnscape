@@ -25,7 +25,7 @@ const Cart = () => {
   } = useStateContext();
 
   return (
-    <div className="cart-wrapper" ref={cartRef}>
+    <div className="cart-wrapper" ref={cartRef} data-testid="cart">
       <div className="cart-container">
         <div className="flyout-heading">
           <div>
@@ -34,6 +34,7 @@ const Cart = () => {
           </div>
           <AiOutlineClose
             className="navbar-buttons"
+            data-testid="close-button"
             onClick={() => setShowCart(false)}
           />
         </div>
@@ -74,6 +75,7 @@ const Cart = () => {
                       <div className="quantity-desc">
                         <button
                           className="minus"
+                          data-testid="decrement quantity"
                           onClick={() =>
                             toggleCartItemQuantity(item._id, "dec")
                           }
@@ -83,6 +85,7 @@ const Cart = () => {
                         <span>{item.quantity}</span>
                         <button
                           className="plus"
+                          data-testid="increment quantity"
                           onClick={() =>
                             toggleCartItemQuantity(item._id, "inc")
                           }
@@ -95,7 +98,10 @@ const Cart = () => {
                       className="remove-item"
                       onClick={() => onRemove(item)}
                     >
-                      <AiOutlineDelete className="action-button-delete" />
+                      <AiOutlineDelete
+                        className="action-button-delete"
+                        data-testid="delete from cart"
+                      />
                     </button>
                   </div>
                 </div>

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 
-const Context = createContext();
+export const Context = createContext();
 
 export const StateContext = ({ children }) => {
   const [catagories, setCatagories] = useState(null);
@@ -35,20 +35,14 @@ export const StateContext = ({ children }) => {
     );
     setTotalQuantity((prevTotalQuantity) => prevTotalQuantity + quantity);
 
-    console.log(`FoundProduct:`);
-    console.log(foundProduct);
     if (foundProduct) {
-      console.log("Update");
       const updatedCartItems = cartItems.map((item) =>
         item._id === product._id
           ? { ...item, quantity: item.quantity + 1 }
           : item
       );
-      console.log(updatedCartItems);
       setCartItems(updatedCartItems);
     } else {
-      console.log("Create");
-      console.log([...cartItems, { ...product, quantity: quantity }]);
       setCartItems([...cartItems, { ...product, quantity: quantity }]);
     }
 

@@ -30,14 +30,14 @@ const Home = ({ bestSelling, error }) => {
       p3: "Mayby try going to our home page?",
       p4: "Come Back Tomorrow!",
     };
-    return <Error error={error} />;
+    return <Error error={error} data-testid="error-component" />;
   }
 
   return (
     <>
-      <HeroBanner />
+      <HeroBanner data-testid="hero-banner" />
       {/* <BestSelling /> */}
-      <ProductCarousel products={bestSelling} />
+      <ProductCarousel products={bestSelling} data-testid="product-carousel" />
       {/* Add additional product carousels here */}
     </>
   );
