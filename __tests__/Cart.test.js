@@ -8,14 +8,14 @@ import { Context } from "../context/StateContext";
 // Mock data for testing
 const mockCartItems = [
   {
-    _id: "1",
+    _id: "2",
     name: "Product 1",
     price: 50,
     images: ["https://example.com/product1.jpg"],
     quantity: 1,
   },
   {
-    _id: "2",
+    _id: "3",
     name: "Product 2",
     price: 75,
     images: ["https://example.com/product2.jpg"],
