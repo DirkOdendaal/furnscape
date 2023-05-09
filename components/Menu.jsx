@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useStateContext } from "../context/StateContext";
-import { AiOutlineClose, AiOutlineArrowRight } from "react-icons/ai";
+import {
+  AiOutlineClose,
+  AiOutlineArrowRight,
+  AiOutlineArrowLeft,
+} from "react-icons/ai";
 import { FiLogOut, FiLogIn } from "react-icons/fi";
 import { FaUser } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
@@ -10,12 +14,22 @@ import Link from "next/link";
 
 const Menu = () => {
   const { setShowMenu, catagories, setCurrentRoute } = useStateContext();
+  const [expandedCategories, setExpandedCategories] = useState(false);
   const router = useRouter();
   const { user, logout } = useAuth();
+
+  const handleBack = () => {
+    setExpandedCategories(false);
+  };
+
   return (
     <div className="cart-wrapper">
       <div className="menu-container">
-        <div className="menu-flyout-heading" onClick={() => setShowMenu(false)}>
+        <div className="menu-flyout-heading">
+          <AiOutlineArrowLeft
+            className="navbar-buttons"
+            onClick={() => handleBack()}
+          />
           <Link href="/">
             <div className="navbar-logo">
               <Image
@@ -27,18 +41,28 @@ const Menu = () => {
               ></Image>
             </div>
           </Link>
-          <AiOutlineClose className="navbar-buttons" />
+          <AiOutlineClose
+            className="navbar-buttons"
+            onClick={() => setShowMenu(false)}
+          />
         </div>
-
-        <div className="menu-section">
-          <span>
-            Item <AiOutlineArrowRight />
-          </span>
-          <span>Item</span>
-          <span>Item</span>
-          <span>Item</span>
-          <span>Item</span>
-        </div>
+        {expandedCategories ? (
+          <div className="menu-section">
+            {catagories?.map((cat, index) => (
+              <span key={index}>{cat.name}</span>
+            ))}
+          </div>
+        ) : (
+          <div className="menu-section">
+            <span onClick={() => setExpandedCategories(true)}>
+              Categories <AiOutlineArrowRight />
+            </span>
+            <span>Item</span>
+            <span>Item</span>
+            <span>Item</span>
+            <span>Item</span>
+          </div>
+        )}
         {user ? (
           <>
             <div className="menu-section">
