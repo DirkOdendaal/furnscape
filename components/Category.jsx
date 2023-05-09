@@ -16,6 +16,7 @@ const Category = ({ category }) => {
           {category.subCategories.map((subCat, index) => {
             return (
               <Link
+                data-testid="cat-link"
                 key={`${index}`}
                 href={{
                   pathname: "/QueriedProducts",
@@ -36,7 +37,7 @@ const Category = ({ category }) => {
                   },
                 }}
               >
-                <li>{subCat}</li>
+                <li data-testid="cat-inner-list">{subCat}</li>
               </Link>
             );
           })}
