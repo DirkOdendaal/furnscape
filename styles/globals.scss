@@ -212,11 +212,31 @@ button:hover {
 }
 
 .cart-container {
+  width: 400px;
   height: 100vh;
   background-color: white;
   float: right;
   position: relative;
   overflow-y: scroll;
+
+  @media (max-width: 500px) {
+    width: 100vw;
+  }
+}
+
+.flyout-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  background-color: white;
+  padding: 15px 20px 15px 20px;
+  width: calc(100% - 40px);
+  top: 0;
+  left: 0;
 }
 
 .cart-num-items {
@@ -240,9 +260,10 @@ button:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 330px;
-  position: fixed;
-  bottom: 0px;
+  width: calc(100% - 40px);
+  position: absolute;
+  bottom: 0;
+  left: 0;
   padding: 10px 20px;
   background-color: white;
 }
@@ -251,20 +272,7 @@ button:hover {
   padding: 60px 0px 170px 0px;
 }
 
-.flyout-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  width: 330px;
-  font-size: 18px;
-  font-weight: 500;
-  border: none;
-  background-color: white;
-  padding: 15px 20px 15px 20px;
-  z-index: 99;
-}
+
 
 .item-desc .flex {
   display: flex;
@@ -329,6 +337,9 @@ button:hover {
   width: 60%;
   float: left;
   position: relative;
+  @media (max-width: 500px){
+    width: 100%;
+  }
 }
 
 .menu-flyout-heading {
@@ -1153,6 +1164,9 @@ button:hover {
   width: 100%;
   padding: 20px;
   margin: 20px;
+  @media (max-width: 500px) {
+    margin: 20px 0px;
+  }
 }
 
 .add-address {
