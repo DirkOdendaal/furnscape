@@ -17,9 +17,9 @@ const Footer = () => {
     <div className="footer-container">
       <p>Furnscape Pty Ltd. All Rights Reserved.</p>
       <p className="icons">
-        <AiFillInstagram />
-        <AiOutlineTwitter />
-        <AiFillFacebook />
+        <AiFillInstagram data-testid="instagram-icon" />
+        <AiOutlineTwitter data-testid="twitter-icon" />
+        <AiFillFacebook data-testid="facebook-icon" />
       </p>
     </div>
   );
