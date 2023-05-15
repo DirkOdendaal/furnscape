@@ -19,4 +19,5 @@ module.exports = {
   },
   basePath: "/furnscape",
   assetPrefix: "/furnscape",
+  trailingSlash: true,
 };
