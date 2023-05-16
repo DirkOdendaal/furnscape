@@ -1,11 +1,11 @@
-import React from "react";
-import { AiOutlineShoppingCart, AiOutlineMenu } from "react-icons/ai";
-import Link from "next/link";
-import { useAuth } from "../context/AuthContext";
-import { useRouter } from "next/router";
-import { useStateContext } from "../context/StateContext";
-import { Cart, Menu } from "./";
-import Image from "next/image";
+import React from 'react';
+import { AiOutlineShoppingCart, AiOutlineMenu } from 'react-icons/ai';
+import Link from 'next/link';
+import { useAuth } from '../context/AuthContext';
+import { useRouter } from 'next/router';
+import { useStateContext } from '../context/StateContext';
+import { Cart, Menu } from './';
+import Image from 'next/image';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -35,7 +35,7 @@ const Navbar = () => {
         >
           <AiOutlineMenu />
         </button>
-        {user?.role !== "supplier" ? (
+        {user?.role !== 'supplier' ? (
           <button type="button" className="sell-button" id="nav-button">
             Sell on Furnscape?
           </button>
@@ -44,10 +44,10 @@ const Navbar = () => {
       <Link href="/">
         <div className="navbar-logo">
           <Image
-            src="/furnscape/fs6.jpeg"
+            src="/images/fs6.jpeg"
             width={190}
             height={0}
-            alt={""}
+            alt={''}
             priority
           ></Image>
         </div>
@@ -60,7 +60,7 @@ const Navbar = () => {
           <div className="dropdown-content">
             {user ? (
               <>
-                {user.role === "customer" ? (
+                {user.role === 'customer' ? (
                   <Link href={`/customer/${user.uid}`}>
                     <button type="button" className="btnDrop">
                       Account
@@ -78,7 +78,7 @@ const Navbar = () => {
                   className="btnDrop"
                   onClick={() => {
                     logout();
-                    router.push("/");
+                    router.push('/');
                   }}
                 >
                   Logout

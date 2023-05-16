@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/globals.scss";
+import "../public/styles/globals.scss";
 import { Layout } from "../components";
 import { AuthContextProvider } from "../context/AuthContext";
 import { StateContext } from "../context/StateContext";

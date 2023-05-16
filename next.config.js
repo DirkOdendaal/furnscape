@@ -2,11 +2,11 @@ module.exports = {
   headers: async () => {
     return [
       {
-        source: "/(.*)",
+        source: '/(.*)',
         headers: [
           {
-            key: "Permissions-Policy",
-            value: "interest-cohort=()",
+            key: 'Permissions-Policy',
+            value: 'interest-cohort=()',
           },
         ],
       },
@@ -14,9 +14,7 @@ module.exports = {
   },
   images: {
     unoptimized: true,
-    domains: ["firebasestorage.googleapis.com"],
-    formats: ["image/avif", "image/webp"],
+    domains: ['firebasestorage.googleapis.com'],
+    formats: ['image/avif', 'image/webp'],
   },
-  basePath: "/furnscape",
-  assetPrefix: "/furnscape",
 };
