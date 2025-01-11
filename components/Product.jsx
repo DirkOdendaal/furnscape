@@ -10,8 +10,8 @@ const Product = ({ product: { images, name, id, price } }) => {
         <Image
           src={images[0]}
           className="product-image"
-          width={150}
-          height={150}
+          width={130}
+          height={130}
           alt={""}
         ></Image>
         <span className="product-name">{name}</span>

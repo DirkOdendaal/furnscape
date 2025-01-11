@@ -42,15 +42,13 @@ const Navbar = () => {
         ) : null}
       </div>
       <Link href="/">
-        <div className="navbar-logo">
           <Image
             src="/images/fs6.jpeg"
-            width={190}
-            height={0}
+            width={180}
+            height={30}
             alt={'Furnscape Logo'}
             priority
           ></Image>
-        </div>
       </Link>
       <div className="navbar-children-right">
         <div className="dropdown">
