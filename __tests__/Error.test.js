@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Error from "../components/Error";
+import ErrorPage from "../components/ErrorPage";
 
 describe("Error component", () => {
   it("renders error message", () => {
@@ -12,7 +12,7 @@ describe("Error component", () => {
       p3: "",
       p4: "",
     };
-    const { getByText } = render(<Error error={error} />);
+    const { getByText } = render(<ErrorPage error={error} />);
     expect(getByText("Error!")).toBeInTheDocument();
     expect(getByText("Hmmm...")).toBeInTheDocument();
     expect(getByText("Something went wrong.")).toBeInTheDocument();

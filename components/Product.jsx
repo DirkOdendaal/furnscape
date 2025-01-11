@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Product = ({ product: { images, name, id, price } }) => {
   return (
-    <Link href={`/product/${id}`}>
+    <Link href={`/product/${id}`} style={{ textDecoration: "none", color: "black" }}>
       <div className="product-card">
         <Image
           src={images[0]}
@@ -14,9 +14,9 @@ const Product = ({ product: { images, name, id, price } }) => {
           height={150}
           alt={""}
         ></Image>
-        <p className="product-name">{name}</p>
-        <p className="product-price">R{price}</p>
-        {/* <p className="product-price"><AiFillStar color="yellow"/> 3.5 (20)</p> */}
+        <span className="product-name">{name}</span>
+        <span className="product-price">R{price}</span>
+        {/* <span className="product-price"><AiFillStar color="yellow"/> 3.5 (20)</span> */}
       </div>
     </Link>
   );

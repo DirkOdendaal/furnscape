@@ -13,7 +13,7 @@ export { default as AddressSearch } from "./AddressSearch";
 export { default as UserDetails } from "./UserDetails";
 export { default as Category } from "./Category";
 export { default as Loading } from "./Loading";
-export { default as Error } from "./Error";
+export { default as ErrorPage } from "./ErrorPage";
 export { default as ProductCarousel } from "./ProductCarousel";
 export { default as QueriedProductsFilter } from "./QueriedProductsFilter";
 export { default as RangeFilter } from "./RangeFilter";

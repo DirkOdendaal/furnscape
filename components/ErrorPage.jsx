@@ -1,6 +1,6 @@
 import React from "react";
 
-const Error = ({ error: { errorTitle, p1, p2, p3, p4 } }) => {
+const ErrorPage = ({ error: { errorTitle, p1, p2, p3, p4 } }) => {
   return (
     <div>
       <div className="moon"></div>
@@ -33,4 +33,4 @@ const Error = ({ error: { errorTitle, p1, p2, p3, p4 } }) => {
   );
 };
 
-export default Error;
+export default ErrorPage;

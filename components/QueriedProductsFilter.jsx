@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Select from "react-select";
 import { RangeFilter } from "../components";
 
 const QueriedProductsFilter = ({ queriedProducts, setFilterProducts }) => {
@@ -7,7 +6,6 @@ const QueriedProductsFilter = ({ queriedProducts, setFilterProducts }) => {
   const [priceRange, setPriceRange] = useState();
   const [filterPriceRange, setfilterPriceRange] = useState();
 
-  //set price list
   useEffect(() => {
     if (queriedProducts) {
       const productPrices = queriedProducts.map((product) => product.price);
@@ -15,14 +13,12 @@ const QueriedProductsFilter = ({ queriedProducts, setFilterProducts }) => {
     }
   }, [queriedProducts]);
 
-  // Set initial Price Range
   useEffect(() => {
     if (prices.length) {
       setPriceRange([Math.min(...prices), Math.max(...prices)]);
     }
   }, [prices]);
 
-  //Set new products to filtered products
   useEffect(() => {
     const filtered = queriedProducts?.filter(
       (product) =>
