@@ -1,5 +1,5 @@
 import React from "react";
-import { getAllByTestId, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import Category from "../components/Category";
@@ -15,11 +15,9 @@ describe("Category", () => {
       <Category category={category} />
     );
 
-    // Assert category name is rendered
     const categoryNameElement = getByText("Category Name");
     expect(categoryNameElement).toBeInTheDocument();
 
-    // Assert subcategories are rendered
     const subcategoryElements = getAllByTestId("cat-inner-list");
     expect(subcategoryElements).toHaveLength(2);
     expect(subcategoryElements[0]).toHaveTextContent("Subcategory 1");

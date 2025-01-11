@@ -5,7 +5,6 @@ import "@testing-library/jest-dom";
 import Cart from "../components/Cart";
 import { Context } from "../context/StateContext";
 
-// Mock data for testing
 const mockCartItems = [
   {
     _id: "1",
@@ -23,7 +22,6 @@ const mockCartItems = [
   },
 ];
 
-// Mock the Next.js Image component
 jest.mock("next/image", () => {
   return (props) => {
     const { src, alt } = props;
@@ -97,7 +95,6 @@ describe("Cart component", () => {
       );
     });
 
-    // Click plus button and check if toggleCartItemQuantity is called with correct arguments
     userEvent.click(plusButton);
     await waitFor(() => {
       expect(toggleCartItemQuantity).toHaveBeenCalledWith(

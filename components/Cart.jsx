@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import Link from "next/link";
 import {
   AiOutlineMinus,
   AiOutlinePlus,
@@ -7,8 +6,6 @@ import {
   AiOutlineShoppingCart,
   AiOutlineDelete,
 } from "react-icons/ai";
-import { FaWallet } from "react-icons/fa";
-import toast from "react-hot-toast";
 
 import { useStateContext } from "../context/StateContext";
 import Image from "next/image";

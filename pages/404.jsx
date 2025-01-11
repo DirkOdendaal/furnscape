@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Error } from "../components";
+import { ErrorPage } from "../components";
 import { useStateContext } from "../context/StateContext";
 
 const FourOhFour = () => {
@@ -14,7 +14,7 @@ const FourOhFour = () => {
     setError(true);
   }, []);
 
-  return <Error error={error} />;
+  return <ErrorPage error={error} />;
 };
 
 export default FourOhFour;
